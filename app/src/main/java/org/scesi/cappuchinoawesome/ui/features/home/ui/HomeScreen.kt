@@ -24,21 +24,25 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier){
+fun HomeScreen(
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = viewModel()){
     Box(
         Modifier
             .fillMaxSize()
             .padding(16.dp))
     {
-        Home(Modifier.align(Alignment.Center))
+        Home(Modifier.align(Alignment.Center), viewModel)
     }
 }
 @Composable
-fun Home(modifier: Modifier){
-    var valueSearch by remember{ mutableStateOf("")}
-    var dropList by remember { mutableStateOf(false) }
+fun Home(modifier: Modifier, viewModel: HomeViewModel){
+    val valueSearch by viewModel.searchText.collectAsStateWithLifecycle()
+    val dropList by viewModel.isOpen.collectAsStateWithLifecycle()
 
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -49,8 +53,7 @@ fun Home(modifier: Modifier){
         SearchBar(
             valueSearch = valueSearch,
             onValueChange = { newValue ->
-                valueSearch = newValue
-                dropList = true
+                viewModel.onChangeTextSearch(newValue)
             }
         )
         if (dropList) {
