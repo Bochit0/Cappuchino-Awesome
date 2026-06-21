@@ -1,9 +1,12 @@
 package org.scesi.cappuchinoawesome.ui.features.home.ui
 
+import android.R
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -24,8 +27,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.TextFieldDefaults
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.scesi.cappuchinoawesome.ui.theme.subtitleApp
+import org.scesi.cappuchinoawesome.ui.theme.titleApp
 
 @Composable
 fun HomeScreen(
@@ -34,6 +42,7 @@ fun HomeScreen(
     Box(
         Modifier
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
             .padding(16.dp))
     {
         Home(Modifier.align(Alignment.Center), viewModel)
@@ -56,6 +65,7 @@ fun Home(modifier: Modifier, viewModel: HomeViewModel){
                 viewModel.onChangeTextSearch(newValue)
             }
         )
+        Spacer(Modifier.height(5.dp))
         if (dropList) {
             DropDownCarrers()
         }
@@ -65,8 +75,14 @@ fun Home(modifier: Modifier, viewModel: HomeViewModel){
 @Composable
 fun TitleApp(){
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text("Cappuchino")
-        Text("Awesome")
+        Text(
+            text = "Cappuchino",
+            color = MaterialTheme.colorScheme.tertiary,
+            style = MaterialTheme.typography.titleApp)
+        Text(
+            text = "Awesome",
+            color = MaterialTheme.colorScheme.secondary,
+            style = MaterialTheme.typography.subtitleApp)
     }
 }
 
@@ -76,9 +92,17 @@ fun SearchBar(valueSearch: String, onValueChange: (String) -> Unit){
             value = valueSearch,
             onValueChange= onValueChange,
             modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text(text = "Buscar Carrera")},
-            singleLine = true, //Para que al hacer click sobre el searhbar este no crezca
-            maxLines = 1 // Siempre acompaña a singleLine
+            placeholder = {
+                Text(text = "Buscar Carrera",
+                     color = MaterialTheme.colorScheme.primary)},
+            singleLine = true,
+            maxLines = 1,
+            colors = TextFieldDefaults.colors(
+                focusedTextColor = MaterialTheme.colorScheme.primary,
+                focusedIndicatorColor = MaterialTheme.colorScheme.secondary,
+                unfocusedIndicatorColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f),
+                disabledIndicatorColor = MaterialTheme.colorScheme.primary
+            )
         )
 
 }
@@ -90,11 +114,12 @@ fun DropDownCarrers(modifier: Modifier = Modifier){
         LazyColumn(
             modifier = modifier
                 .fillMaxWidth()
-                .heightIn(max = 280.dp)
+                .heightIn(max = 400.dp)
         ) {
             items(menuItemData){
                 carrera ->
                     CarrerCard(carrerName = carrera)
+                    HorizontalLine()
             }
         }
     }
@@ -103,16 +128,35 @@ fun DropDownCarrers(modifier: Modifier = Modifier){
 @Composable
 fun CarrerCard(carrerName: String, modifier: Modifier = Modifier){
     Card(
-        modifier = modifier,
-        shape = RoundedCornerShape(6.dp)
+        modifier = Modifier
+            .padding(bottom = 4.dp)
+            .height(54.dp),
+        shape = RoundedCornerShape(6.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondary,
+            contentColor = MaterialTheme.colorScheme.background
+        )
     ) {
-       Text(
-           text = carrerName
-       )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .padding(horizontal = 16.dp),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            Text(
+                text = carrerName,
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
     }
 }
 
 @Composable
-fun HorizontalLine(){
-    Card(){}
+fun HorizontalLine(modifier : Modifier = Modifier){
+    HorizontalDivider(
+        modifier = modifier.padding(vertical = 8.dp),
+        thickness = 3.dp,
+        color = MaterialTheme.colorScheme.tertiary
+    )
 }
