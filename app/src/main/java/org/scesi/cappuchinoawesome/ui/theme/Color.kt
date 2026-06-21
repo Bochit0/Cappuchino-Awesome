@@ -2,10 +2,11 @@ package org.scesi.cappuchinoawesome.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val White = Color(0xFFFFFFFF)
+val StormyGreen = Color(0xFF006466)
+val DeepPurple = Color(0xFF4d194d)
+val SpaceIndigo = Color(0xFF272640)
+val DarkIndigo = Color(0xFF1e1d33)
+val TiffanyBlue = Color(0xFF4dd0d4)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val Gray = Color(0xFF424247)
