@@ -1,5 +1,6 @@
 package org.scesi.cappuchinoawesome.ui.features.home.ui
 
+import DropDown
 import android.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -110,19 +111,13 @@ fun SearchBar(valueSearch: String, onValueChange: (String) -> Unit){
 @Composable
 fun DropDownCarrers(modifier: Modifier = Modifier){
     val menuItemData = List(20) { "Option ${it + 1}" }
-    Box(){
-        LazyColumn(
-            modifier = modifier
-                .fillMaxWidth()
-                .heightIn(max = 400.dp)
-        ) {
-            items(menuItemData){
-                carrera ->
-                    CarrerCard(carrerName = carrera)
-                    HorizontalLine()
-            }
+    DropDown(
+        itemCount = menuItemData.size,
+        itemDivider = { HorizontalLine() },
+        itemContent = { index ->
+            CarrerCard(carrerName = menuItemData[index])
         }
-    }
+    )
 }
 
 @Composable
