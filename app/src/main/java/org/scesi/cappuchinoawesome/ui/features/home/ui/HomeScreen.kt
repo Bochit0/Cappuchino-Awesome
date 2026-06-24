@@ -33,24 +33,36 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextFieldDefaults
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.scesi.cappuchinoawesome.ui.navigation.Routes
 import org.scesi.cappuchinoawesome.ui.theme.subtitleApp
 import org.scesi.cappuchinoawesome.ui.theme.titleApp
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel = viewModel()){
+    viewModel: HomeViewModel = viewModel(),
+    onNavigate: (Routes) -> Unit
+){
     Box(
-        Modifier
+        modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
             .padding(16.dp))
     {
-        Home(Modifier.align(Alignment.Center), viewModel)
+        Home(
+            modifier = modifier.align(Alignment.Center),
+            viewModel = viewModel,
+            onNavigate = onNavigate
+        )
     }
 }
+
 @Composable
-fun Home(modifier: Modifier, viewModel: HomeViewModel){
+fun Home(
+    modifier: Modifier,
+    viewModel: HomeViewModel,
+    onNavigate: (Routes) -> Unit
+){
     val valueSearch by viewModel.searchText.collectAsStateWithLifecycle()
     val dropList by viewModel.isOpen.collectAsStateWithLifecycle()
 
@@ -68,7 +80,7 @@ fun Home(modifier: Modifier, viewModel: HomeViewModel){
         )
         Spacer(Modifier.height(5.dp))
         if (dropList) {
-            DropDownCarrers()
+            DropDownCarrers(onNavigate = onNavigate)
         }
     }
 }
@@ -109,23 +121,29 @@ fun SearchBar(valueSearch: String, onValueChange: (String) -> Unit){
 }
 
 @Composable
-fun DropDownCarrers(modifier: Modifier = Modifier){
+fun DropDownCarrers(modifier: Modifier = Modifier, onNavigate: (Routes) -> Unit){
     val menuItemData = List(20) { "Option ${it + 1}" }
     DropDown(
         itemCount = menuItemData.size,
         itemDivider = { HorizontalLine() },
         itemContent = { index ->
-            CarrerCard(carrerName = menuItemData[index])
+            CarrerCard(carrerName = menuItemData[index],
+                onClick = { onNavigate(Routes.ScreenSchedule) }
+            )
         }
     )
 }
 
 @Composable
-fun CarrerCard(carrerName: String, modifier: Modifier = Modifier){
+fun CarrerCard(
+    carrerName: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier){
     Card(
-        modifier = Modifier
+        modifier = modifier
             .padding(bottom = 4.dp)
             .height(54.dp),
+        onClick = onClick,
         shape = RoundedCornerShape(6.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.secondary,
