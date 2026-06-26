@@ -11,6 +11,8 @@ composeBom = "2026.02.01"
 kotlinxSerializationJson = "1.11.0"
 navigation3 = "1.1.2"
 viewModelCompose = "2.10.0"
+foundation = "1.11.3"
+runtime = "1.11.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -33,6 +35,8 @@ androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", vers
 
 lifecycle-runtime = {module = "androidx.lifecycle:lifecycle-runtime-compose",  version.ref = "viewModelCompose"}
 lifecycle-viewModel = {module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "viewModelCompose"}
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation", version.ref = "foundation" }
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
