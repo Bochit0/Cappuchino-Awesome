@@ -9,8 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import org.scesi.cappuchinoawesome.ui.features.home.ui.HomeScreen
-import org.scesi.cappuchinoawesome.ui.features.home.ui.HomeViewModel
+import org.scesi.cappuchinoawesome.ui.navigation.NavApp
 import org.scesi.cappuchinoawesome.ui.theme.CappuchinoawesomeTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     containerColor = MaterialTheme.colorScheme.background)
                 { innerPadding ->
-                    HomeScreen(modifier = Modifier.padding(innerPadding))
+                    NavApp(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
