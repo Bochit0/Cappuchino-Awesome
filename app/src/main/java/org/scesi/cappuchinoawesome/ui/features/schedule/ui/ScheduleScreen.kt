@@ -153,7 +153,8 @@ fun SemesterItem(
                         subject.groups,
                         viewModel
                     )
-                }
+                },
+                verticalLine = true
             )
         }
     }
@@ -179,7 +180,8 @@ fun SubjectItem(
                 items = groups,
                 itemContent = { group ->
                     GroupItem(teacherName = group.teacher)
-                }
+                },
+                verticalLine = true
             )
         }
     }
