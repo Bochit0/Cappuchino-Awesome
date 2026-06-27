@@ -125,7 +125,7 @@ fun SearchBar(valueSearch: String, onValueChange: (String) -> Unit){
 fun DropDownCarrers(
     modifier: Modifier = Modifier,
     onNavigate: (Routes) -> Unit,
-    stateCareer: StatesControl
+    stateCareer: StatesControl<List<Career>>
 ){
     when(stateCareer){
         is StatesControl.Loading -> {
@@ -137,9 +137,9 @@ fun DropDownCarrers(
             }
         }
 
-        is StatesControl.Success -> {
+        is StatesControl.Success<List<Career>> -> {
             CareerList(
-                careers = stateCareer.carreers,
+                careers = stateCareer.data,
                 onNavigate = onNavigate
             )
         }
@@ -183,7 +183,7 @@ fun CareerList(
         itemContent = { career ->
             CareerCard(
                 careerName = career.name,
-                onClick = { onNavigate(Routes.ScreenSchedule) }
+                onClick = { onNavigate(Routes.ScreenSchedule(career.code)) }
             )
         }
     )

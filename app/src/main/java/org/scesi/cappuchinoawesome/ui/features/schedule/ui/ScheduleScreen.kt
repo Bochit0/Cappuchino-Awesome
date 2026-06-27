@@ -7,20 +7,24 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import org.scesi.cappuchinoawesome.ui.features.home.ui.HomeViewModel
+import org.scesi.cappuchinoawesome.ui.network.data.DetailCareer
+import org.scesi.cappuchinoawesome.ui.network.data.Group
+import org.scesi.cappuchinoawesome.ui.network.data.Level
+import org.scesi.cappuchinoawesome.ui.network.data.StatesControl
+import org.scesi.cappuchinoawesome.ui.network.data.Subject
 import org.scesi.cappuchinoawesome.ui.utils.button.ButtonComponent
 import org.scesi.cappuchinoawesome.ui.utils.dropdown.DropDownComponent
 import org.scesi.cappuchinoawesome.ui.utils.header.HeaderComponent
@@ -28,21 +32,38 @@ import org.scesi.cappuchinoawesome.ui.utils.icons.Icons
 import org.scesi.cappuchinoawesome.ui.utils.itemcard.ItemCard
 
 @Composable
-fun ScheduleScreen(viewModel: ScheduleViewModel = viewModel()){
+fun ScheduleScreen(
+    viewModel: ScheduleViewModel = viewModel(),
+    careerCode: Int
+){
+    LaunchedEffect(careerCode) {
+        viewModel.loadDetail(careerCode)
+    }
+
+    val detailState by viewModel.detailState.collectAsStateWithLifecycle()
+
     Box(modifier = Modifier.fillMaxSize()){
-        Schedule(viewModel)
+        Schedule(viewModel, detailState = detailState)
     }
 }
 
 @Composable
 fun Schedule(
     viewModel: ScheduleViewModel,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    detailState: StatesControl<DetailCareer>
 ){
     val openMenu by viewModel.openSemesters.collectAsStateWithLifecycle()
     Column(modifier = modifier
         .fillMaxSize()
     ) {
+        val titleHeader = when (detailState) {
+            is StatesControl.Success -> detailState.data.name
+            is StatesControl.Loading -> "Cargando..."
+            is StatesControl.Error -> "Error"
+            is StatesControl.Empty -> ""
+        }
+
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -50,7 +71,7 @@ fun Schedule(
                 .windowInsetsTopHeight(WindowInsets.statusBars)
         )
         HeaderComponent(
-            titleHeader = "MANTECOÑO",
+            titleHeader = titleHeader,
             backgroundColor = MaterialTheme.colorScheme.secondary,
             titleColor = MaterialTheme.colorScheme.background,
             leftAction = {ButtonComponent(
@@ -68,7 +89,15 @@ fun Schedule(
         )
 
         if(openMenu){
-            InteractiveMenu(viewModel)
+            when (detailState) {
+                is StatesControl.Success -> InteractiveMenu(
+                    viewModel = viewModel,
+                    levels = detailState.data.levels
+                )
+                is StatesControl.Loading -> CircularProgressIndicator()
+                is StatesControl.Error -> Text(text = detailState.message)
+                is StatesControl.Empty -> Text(text = "Sin datos")
+            }
         }
 
         TableTime()
@@ -77,8 +106,10 @@ fun Schedule(
     }
 }
 @Composable
-fun InteractiveMenu(viewModel: ScheduleViewModel) {
-    val semestres = List(8) { "Semestre ${it + 1}" }
+fun InteractiveMenu(
+    viewModel: ScheduleViewModel,
+    levels: List<Level>
+) {
     Box(
         modifier = Modifier
             .fillMaxHeight()
@@ -86,38 +117,42 @@ fun InteractiveMenu(viewModel: ScheduleViewModel) {
             .background(MaterialTheme.colorScheme.tertiary)
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            itemsIndexed(semestres) { index, semestre ->
+            itemsIndexed(levels) { index, level ->
                 SemesterItem(
                     viewModel = viewModel,
-                    semesterName = semestre,
-                    index = index
+                    semesterCode = "SEMESTRE ${level.code}",
+                    subjects = level.subjects
                 )
             }
         }
     }
 }
 
-
 @Composable
 fun SemesterItem(
     viewModel: ScheduleViewModel,
-    semesterName: String,
-    index: Int
+    semesterCode: String,
+    subjects: List<Subject>,
 ) {
-    val materias = List(7) { "Materia ${it + 1}" }
-    val openSemesterIndex by viewModel.openSubjectIndex.collectAsStateWithLifecycle()
-    val isExpanded = openSemesterIndex == index
+    val openSubjectIndex by viewModel.openSubjectIndex.collectAsStateWithLifecycle()
+    val isExpanded = openSubjectIndex == semesterCode
 
     Column {
         ItemCard(
-            name = semesterName,
-            onClick = { viewModel.onClickSemester(index) },
+            name = semesterCode,
+            onClick = { viewModel.onClickSemester(semesterCode) },
         )
         if (isExpanded) {
             DropDownComponent(
-                items = materias,
-                itemContent = { materia ->
-                    SubjectItem(subjectName = materia, index, viewModel)
+                items = subjects,
+                itemContent = { subject ->
+                    SubjectItem(
+                        subjectName =
+                            subject.name,
+                        subject.code,
+                        subject.groups,
+                        viewModel
+                    )
                 }
             )
         }
@@ -127,23 +162,23 @@ fun SemesterItem(
 @Composable
 fun SubjectItem(
     subjectName: String,
-    index: Int,
+    subjectCode: Int,
+    groups: List<Group>,
     viewModel: ScheduleViewModel
 ){
-    val docentes = List(2) { "Docente ${it + 1}" }
     val openSubjectIndex by viewModel.openTeacherIndex.collectAsStateWithLifecycle()
-    val isExpanded = openSubjectIndex == index
+    val isExpanded = openSubjectIndex == subjectCode
 
     Column {
         ItemCard(
             name = subjectName,
-            onClick = { viewModel.onClickSubject(index) },
+            onClick = { viewModel.onClickSubject(subjectCode) },
         )
         if (isExpanded) {
             DropDownComponent(
-                items = docentes,
-                itemContent = { docente ->
-                    TeacherItem(teacherName = docente)
+                items = groups,
+                itemContent = { group ->
+                    GroupItem(teacherName = group.teacher)
                 }
             )
         }
@@ -151,7 +186,7 @@ fun SubjectItem(
 }
 
 @Composable
-fun TeacherItem(teacherName: String){
+fun GroupItem(teacherName: String){
     ItemCard(
         name = teacherName,
         onClick = {},
