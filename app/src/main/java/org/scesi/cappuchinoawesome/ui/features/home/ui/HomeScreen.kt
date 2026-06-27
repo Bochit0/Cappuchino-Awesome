@@ -20,13 +20,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextFieldDefaults
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.scesi.cappuchinoawesome.ui.navigation.Routes
+import org.scesi.cappuchinoawesome.ui.network.data.Career
+import org.scesi.cappuchinoawesome.ui.network.data.StatesControl
 import org.scesi.cappuchinoawesome.ui.theme.subtitleApp
+import org.scesi.cappuchinoawesome.ui.theme.title
 import org.scesi.cappuchinoawesome.ui.theme.titleApp
 
 @Composable
@@ -57,6 +61,7 @@ fun Home(
 ){
     val valueSearch by viewModel.searchText.collectAsStateWithLifecycle()
     val dropList by viewModel.isOpen.collectAsStateWithLifecycle()
+    val stateCareers by viewModel.careerState.collectAsStateWithLifecycle()
 
     Column(
         modifier = modifier.fillMaxWidth(),
@@ -72,7 +77,11 @@ fun Home(
         )
         Spacer(Modifier.height(5.dp))
         if (dropList) {
-            DropDownCarrers(onNavigate = onNavigate)
+            DropDownCarrers(
+                modifier = modifier,
+                onNavigate = onNavigate,
+                stateCareer = stateCareers
+            )
         }
     }
 }
@@ -113,23 +122,76 @@ fun SearchBar(valueSearch: String, onValueChange: (String) -> Unit){
 }
 
 @Composable
-fun DropDownCarrers(modifier: Modifier = Modifier, onNavigate: (Routes) -> Unit){
-    val menuItemData = List(20) { "Option ${it + 1}" }
+fun DropDownCarrers(
+    modifier: Modifier = Modifier,
+    onNavigate: (Routes) -> Unit,
+    stateCareer: StatesControl
+){
+    when(stateCareer){
+        is StatesControl.Loading -> {
+            Box(
+                modifier = Modifier.fillMaxWidth().padding(24.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator(color = MaterialTheme.colorScheme.secondary)
+            }
+        }
+
+        is StatesControl.Success -> {
+            CareerList(
+                careers = stateCareer.carreers,
+                onNavigate = onNavigate
+            )
+        }
+
+        is StatesControl.Empty -> {
+            Box(
+                modifier = Modifier.fillMaxWidth().padding(24.dp),
+                contentAlignment = Alignment.Center
+            ){
+                Text(
+                    text = "No hay carreras disponibles",
+                    style = MaterialTheme.typography.title,
+                    color = MaterialTheme.colorScheme.secondary
+                )
+            }
+        }
+
+        is StatesControl.Error -> {
+            Box(
+                modifier = Modifier.fillMaxWidth().padding(24.dp),
+                contentAlignment = Alignment.Center
+            ){
+                Text(
+                    text = stateCareer.message,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.error
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun CareerList(
+    careers: List<Career>,
+    onNavigate: (Routes) -> Unit
+) {
     DropDownComponent(
-        items = menuItemData,
+        items = careers,
         itemDivider = { HorizontalLine() },
-        itemContent = { index ->
-            CarrerCard(
-                carrerName = index,
-                onClick = {onNavigate(Routes.ScreenSchedule)}
+        itemContent = { career ->
+            CareerCard(
+                careerName = career.name,
+                onClick = { onNavigate(Routes.ScreenSchedule) }
             )
         }
     )
 }
 
 @Composable
-fun CarrerCard(
-    carrerName: String,
+fun CareerCard(
+    careerName: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier){
     Card(
@@ -151,7 +213,7 @@ fun CarrerCard(
             contentAlignment = Alignment.CenterStart
         ) {
             Text(
-                text = carrerName,
+                text = careerName,
                 style = MaterialTheme.typography.bodyLarge
             )
         }
