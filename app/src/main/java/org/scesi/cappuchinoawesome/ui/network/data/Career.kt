@@ -1,6 +1,6 @@
 package org.scesi.cappuchinoawesome.ui.network.data
 
-data class Carreer(val num: Int, val name: String, val level: List<Level>)
+data class Career(val num: Int, val name: String, val level: List<Level>)
 
 data class Level(val code: String, val name:String, val subjects: List<Subject>)
 
