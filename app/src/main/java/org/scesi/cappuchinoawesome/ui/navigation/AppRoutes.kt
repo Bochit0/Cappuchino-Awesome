@@ -19,8 +19,8 @@ fun NavApp(modifier: Modifier = Modifier){
             entry<Routes.ScreenHome> {
                 HomeScreen(modifier = modifier, onNavigate = { route -> backStack.add(route)})
             }
-            entry<Routes.ScreenSchedule> {
-                ScheduleScreen()
+            entry<Routes.ScreenSchedule> { route ->
+                ScheduleScreen(careerCode = route.careerCode)
             }
         }
     )

@@ -1,8 +1,8 @@
 package org.scesi.cappuchinoawesome.ui.network.data
 
-sealed class StatesControl {
-    data object Loading : StatesControl()
-    data class Success(val carreers: List<Career>) : StatesControl()
-    data object Empty : StatesControl()
-    data class Error(val message: String) : StatesControl()
+sealed class StatesControl<out T> {
+    data object Loading : StatesControl<Nothing>()
+    data class Success<T>(val data: T) : StatesControl<T>()
+    data object Empty : StatesControl<Nothing>()
+    data class Error(val message: String) : StatesControl<Nothing>()
 }

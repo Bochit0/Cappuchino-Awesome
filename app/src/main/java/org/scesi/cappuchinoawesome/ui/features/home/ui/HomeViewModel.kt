@@ -7,19 +7,20 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.scesi.cappuchinoawesome.ui.features.home.data.CareerService
 import org.scesi.cappuchinoawesome.ui.network.ApiService
+import org.scesi.cappuchinoawesome.ui.network.data.Career
 import org.scesi.cappuchinoawesome.ui.network.data.StatesControl
 
 class HomeViewModel : ViewModel() {
 
     private val careers = CareerService()
 
-    private val _careerState = MutableStateFlow<StatesControl>(StatesControl.Loading)
+    private val _careerState = MutableStateFlow<StatesControl <List <Career>>>(StatesControl.Loading)
     private val _searchText = MutableStateFlow("")
     private val _isOpen = MutableStateFlow(false)
 
     val searchText : StateFlow<String> = _searchText.asStateFlow()
     val isOpen: StateFlow<Boolean> = _isOpen.asStateFlow()
-    val careerState: StateFlow<StatesControl> = _careerState.asStateFlow()
+    val careerState: StateFlow<StatesControl<List <Career>>> = _careerState.asStateFlow()
 
     init {
         loadCareers()
