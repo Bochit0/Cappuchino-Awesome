@@ -25,6 +25,7 @@ import org.scesi.cappuchinoawesome.ui.network.data.Group
 import org.scesi.cappuchinoawesome.ui.network.data.Level
 import org.scesi.cappuchinoawesome.ui.network.data.StatesControl
 import org.scesi.cappuchinoawesome.ui.network.data.Subject
+import org.scesi.cappuchinoawesome.ui.theme.text
 import org.scesi.cappuchinoawesome.ui.utils.button.ButtonComponent
 import org.scesi.cappuchinoawesome.ui.utils.dropdown.DropDownComponent
 import org.scesi.cappuchinoawesome.ui.utils.header.HeaderComponent
@@ -114,7 +115,11 @@ fun InteractiveMenu(
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxWidth(0.55f)
-            .background(MaterialTheme.colorScheme.tertiary)
+            .background(MaterialTheme
+                .colorScheme
+                .tertiary
+                .copy(alpha = 0.67f)
+            )
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             itemsIndexed(levels) { index, level ->
@@ -191,6 +196,7 @@ fun SubjectItem(
 fun GroupItem(teacherName: String){
     ItemCard(
         name = teacherName,
+        textStyle = MaterialTheme.typography.text,
         onClick = {},
     )
 }

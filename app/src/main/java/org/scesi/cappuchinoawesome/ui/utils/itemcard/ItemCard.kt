@@ -12,14 +12,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import org.scesi.cappuchinoawesome.ui.theme.subtitle
 
 @Composable
 fun ItemCard(
+    modifier: Modifier = Modifier,
     name: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
+    textStyle: TextStyle = MaterialTheme.typography.subtitle,
 ) {
     Row(
         modifier = modifier
@@ -32,7 +34,7 @@ fun ItemCard(
     ){
         Text(
             text = name,
-            style = MaterialTheme.typography.subtitle,
+            style = textStyle,
             color = MaterialTheme.colorScheme.background
         )
     }

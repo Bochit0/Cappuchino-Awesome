@@ -1,13 +1,10 @@
 package org.scesi.cappuchinoawesome.ui.utils.dropdown
 
-import androidx.compose.animation.expandVertically
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -48,7 +45,10 @@ fun <T> DropDownComponent(
                             modifier = Modifier
                                 .width(5.dp)
                                 .height(54.dp)
-                                .background(MaterialTheme.colorScheme.secondary)
+                                .background(MaterialTheme
+                                    .colorScheme
+                                    .secondary
+                                    .copy(alpha = 0.67f))
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                     }
