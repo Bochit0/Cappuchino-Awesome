@@ -11,13 +11,14 @@ data class Group(val code: String, val teacher: String, val schedule: List<Slot>
 
 data class Slot(
     val day: Day,
-    val startMin: Int,
-    val endMin: Int,
+    val start: String,
+    val end: String,
     val room: String,
     val teacher: String,
     val isClass: Boolean
 )
 
+data class GroupSubject(val group: Group, val subjectName: String)
 enum class Day {
     LU, MA, MI, JU, VI, SA
 }
