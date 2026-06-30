@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import org.scesi.cappuchinoawesome.ui.network.data.Day
 import org.scesi.cappuchinoawesome.ui.network.data.GroupSubject
 import org.scesi.cappuchinoawesome.ui.theme.subtitle
+import org.scesi.cappuchinoawesome.ui.theme.text
 
 const val BASE_DP_GROUP = 60
 
@@ -47,12 +48,23 @@ fun rowHeightForBlock(
     blockTime: String,
     selectedGroups: List<GroupSubject>
 ): Dp {
-    val groupsInBlock = selectedGroups.count { groupSubject ->
-        groupSubject.group.schedule.any { slot ->
-            formatJSONTime(slot.start) == blockTime
+    var maxInAnyDay = 0
+
+    for (day in Day.entries) {
+        var countInDay = 0
+        for (gs in selectedGroups) {
+            for (slot in gs.group.schedule) {
+                if (slot.day == day && formatJSONTime(slot.start) == blockTime) {
+                    countInDay++
+                }
+            }
+        }
+        if (countInDay > maxInAnyDay) {
+            maxInAnyDay = countInDay
         }
     }
-    return (maxOf(1, groupsInBlock) * BASE_DP_GROUP).dp
+
+    return (maxOf(1, maxInAnyDay) * BASE_DP_GROUP).dp
 }
 
 fun formatJSONTime(start: String): String {
@@ -188,13 +200,13 @@ fun SlotCard(
                         ) {
                             Text(
                                 text = group.subjectName,
-                                style = MaterialTheme.typography.labelSmall,
+                                style = MaterialTheme.typography.text,
                                 maxLines = 2,
                                 overflow = TextOverflow.Ellipsis
                             )
                             Text(
-                                text = group.group.code,
-                                style = MaterialTheme.typography.labelSmall,
+                                text = "G: ${group.group.code}",
+                                style = MaterialTheme.typography.text,
                                 color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f)
                             )
                         }
