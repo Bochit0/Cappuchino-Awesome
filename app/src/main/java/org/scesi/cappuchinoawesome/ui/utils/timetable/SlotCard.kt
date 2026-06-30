@@ -13,21 +13,30 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.scesi.cappuchinoawesome.ui.network.data.GroupSubject
 import org.scesi.cappuchinoawesome.ui.theme.text
+import org.scesi.cappuchinoawesome.ui.utils.modal.Modal
 import kotlin.collections.forEach
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import org.scesi.cappuchinoawesome.ui.network.data.Day
+import org.scesi.cappuchinoawesome.ui.network.data.Slot
 
 
 @Composable
 fun SlotCard(
+    modifier: Modifier = Modifier,
     groups: List<GroupSubject>,
     height: Dp,
-    modifier: Modifier = Modifier
+    day: Day
 ){
+    var selectForModal by remember { mutableStateOf<Pair<GroupSubject, Slot>?>(null) }
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -37,12 +46,18 @@ fun SlotCard(
         if(groups.isNotEmpty()){
             Column(modifier = Modifier.fillMaxSize()) {
                 val cardHeight = height / groups.size
-                groups.forEach { group ->
+                groups.forEach { groupSubject ->
+                    val currentSlot = groupSubject.group.schedule.firstOrNull(){it.day == day}
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(cardHeight)
                             .padding(1.dp),
+                        onClick = {
+                            if (currentSlot != null) {
+                                selectForModal = Pair(groupSubject, currentSlot)
+                            }
+                        },
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.85f),
                             contentColor = MaterialTheme.colorScheme.onPrimary
@@ -56,13 +71,13 @@ fun SlotCard(
                             verticalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(
-                                text = group.subjectName,
+                                text = groupSubject.subjectName,
                                 style = MaterialTheme.typography.text,
                                 maxLines = 2,
                                 overflow = TextOverflow.Ellipsis
                             )
                             Text(
-                                text = "G: ${group.group.code}",
+                                text = "G: ${groupSubject.group.code}",
                                 style = MaterialTheme.typography.text,
                                 color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f)
                             )
@@ -71,5 +86,17 @@ fun SlotCard(
                 }
             }
         }
+    }
+
+    val currentGroup = selectForModal
+    if (currentGroup != null) {
+        val (groupSubject, clickedSlot) = currentGroup
+        Modal(
+            textHeader = groupSubject.subjectName,
+            textMedium = clickedSlot.room,
+            textFooter = "Grupo: ${groupSubject.group.code}",
+            isClass = clickedSlot.isClass ,
+            onDismiss = { selectForModal = null }
+        )
     }
 }

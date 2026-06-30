@@ -159,7 +159,8 @@ fun DayColumn(
 
             SlotCard(
                 groups = groupsInBlock,
-                height = rowHeights[index]
+                height = rowHeights[index],
+                day = day
             )
         }
     }

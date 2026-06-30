@@ -62,24 +62,24 @@ class ScheduleViewModel: ViewModel() {
         }
         return false
     }
-    fun selectGroup(group: Group, subjectName: String){
-        val currentGroups = _selectedGroups.value
-        val item = GroupSubject(group, subjectName)
+    fun selectGroup(group: Group, subjectName: String) {
+            val currentGroups = _selectedGroups.value
+            val item = GroupSubject(group, subjectName)
 
-        val isSelected = isGroupSelected(group, currentGroups)
-        if (isSelected) {
-            val newList = mutableListOf<GroupSubject>()
-            for (gs in currentGroups) {
-                if (gs.group != group) {
-                    newList.add(gs)
+            val isSelected = isGroupSelected(group, currentGroups)
+            if (isSelected) {
+                val newList = mutableListOf<GroupSubject>()
+                for (gs in currentGroups) {
+                    if (gs.group != group) {
+                        newList.add(gs)
+                    }
                 }
+                _selectedGroups.value = newList
+            } else {
+                val newList = mutableListOf<GroupSubject>()
+                newList.addAll(currentGroups)
+                newList.add(item)
+                _selectedGroups.value = newList
             }
-            _selectedGroups.value = newList
-        } else {
-            val newList = mutableListOf<GroupSubject>()
-            newList.addAll(currentGroups)
-            newList.add(item)
-            _selectedGroups.value = newList
-        }
     }
 }
