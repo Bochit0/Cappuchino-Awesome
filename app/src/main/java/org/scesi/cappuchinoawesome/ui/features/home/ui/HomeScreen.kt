@@ -34,7 +34,7 @@ import org.scesi.cappuchinoawesome.ui.theme.subtitleApp
 import org.scesi.cappuchinoawesome.ui.theme.title
 import org.scesi.cappuchinoawesome.ui.theme.titleApp
 import org.scesi.cappuchinoawesome.ui.utils.button.ButtonComponent
-import org.scesi.cappuchinoawesome.ui.utils.icons.Icons.customWaveBottom
+import org.scesi.cappuchinoawesome.ui.utils.icons.Icon.customWaveBottom
 
 @Composable
 fun HomeScreen(
