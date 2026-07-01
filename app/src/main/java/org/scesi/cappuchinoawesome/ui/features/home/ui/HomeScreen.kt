@@ -1,5 +1,6 @@
 package org.scesi.cappuchinoawesome.ui.features.home.ui
 
+import androidx.compose.foundation.Image
 import org.scesi.cappuchinoawesome.ui.utils.dropdown.DropDownComponent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -11,19 +12,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.getValue
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.ui.layout.ContentScale
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.scesi.cappuchinoawesome.ui.navigation.Routes
@@ -32,6 +33,8 @@ import org.scesi.cappuchinoawesome.ui.network.data.StatesControl
 import org.scesi.cappuchinoawesome.ui.theme.subtitleApp
 import org.scesi.cappuchinoawesome.ui.theme.title
 import org.scesi.cappuchinoawesome.ui.theme.titleApp
+import org.scesi.cappuchinoawesome.ui.utils.button.ButtonComponent
+import org.scesi.cappuchinoawesome.ui.utils.icons.Icons.customWaveBottom
 
 @Composable
 fun HomeScreen(
@@ -59,7 +62,6 @@ fun Home(
     viewModel: HomeViewModel,
     onNavigate: (Routes) -> Unit
 ){
-    val valueSearch by viewModel.searchText.collectAsStateWithLifecycle()
     val dropList by viewModel.isOpen.collectAsStateWithLifecycle()
     val stateCareers by viewModel.careerState.collectAsStateWithLifecycle()
 
@@ -67,21 +69,38 @@ fun Home(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
         TitleApp()
-        Spacer(Modifier.height(20.dp))
-        SearchBar(
-            valueSearch = valueSearch,
-            onValueChange = { newValue ->
-                viewModel.onChangeTextSearch(newValue)
+        Spacer(Modifier.height(30.dp))
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    imageVector = customWaveBottom(color = MaterialTheme.colorScheme.secondary),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(60.dp)
+                        .offset(y = 10.dp),
+                    contentScale = ContentScale.FillBounds
+                )
+                CarrerSelectButton(
+                    onClick = { viewModel.toggleCarrers() }
+                )
+                Spacer(Modifier.height(5.dp))
+                if (dropList) {
+                    DropDownCarrers(
+                        modifier = modifier,
+                        onNavigate = onNavigate,
+                        stateCareer = stateCareers
+                    )
+                }
             }
-        )
-        Spacer(Modifier.height(5.dp))
-        if (dropList) {
-            DropDownCarrers(
-                modifier = modifier,
-                onNavigate = onNavigate,
-                stateCareer = stateCareers
-            )
         }
     }
 }
@@ -101,23 +120,16 @@ fun TitleApp(){
 }
 
 @Composable
-fun SearchBar(valueSearch: String, onValueChange: (String) -> Unit){
-        TextField(
-            value = valueSearch,
-            onValueChange= onValueChange,
-            modifier = Modifier.fillMaxWidth(),
-            placeholder = {
-                Text(text = "Buscar Carrera",
-                     color = MaterialTheme.colorScheme.primary)},
-            singleLine = true,
-            maxLines = 1,
-            colors = TextFieldDefaults.colors(
-                focusedTextColor = MaterialTheme.colorScheme.primary,
-                focusedIndicatorColor = MaterialTheme.colorScheme.secondary,
-                unfocusedIndicatorColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f),
-                disabledIndicatorColor = MaterialTheme.colorScheme.primary
-            )
-        )
+fun CarrerSelectButton(
+    onClick: () -> Unit
+){
+    ButtonComponent(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth(),
+        isText =  "Ver Carreras" ,
+        backgroundColor = MaterialTheme.colorScheme.secondary,
+        textColor = MaterialTheme.colorScheme.background
+    )
 
 }
 

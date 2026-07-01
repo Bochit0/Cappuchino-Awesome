@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,6 +29,7 @@ import org.scesi.cappuchinoawesome.ui.network.data.Group
 import org.scesi.cappuchinoawesome.ui.network.data.Level
 import org.scesi.cappuchinoawesome.ui.network.data.StatesControl
 import org.scesi.cappuchinoawesome.ui.network.data.Subject
+import org.scesi.cappuchinoawesome.ui.theme.text
 import org.scesi.cappuchinoawesome.ui.utils.button.ButtonComponent
 import org.scesi.cappuchinoawesome.ui.utils.dropdown.DropDownComponent
 import org.scesi.cappuchinoawesome.ui.utils.header.HeaderComponent
@@ -79,15 +81,19 @@ fun Schedule(
             titleHeader = titleHeader,
             backgroundColor = MaterialTheme.colorScheme.secondary,
             titleColor = MaterialTheme.colorScheme.background,
-            leftAction = {ButtonComponent(
+            leftAction = { ButtonComponent(
                 onClick = { viewModel.toggleMenu() },
-                isIcon = Icons.listNested(color = MaterialTheme.colorScheme.secondary),
+                isIcon = if (openMenu) {
+                    Icons.listNested(color = MaterialTheme.colorScheme.background)
+                } else {
+                    Icons.list(color = MaterialTheme.colorScheme.background)
+                },
                 backgroundColor = MaterialTheme.colorScheme.secondary,
                 textColor = MaterialTheme.colorScheme.background
             )},
             rightAction = { ButtonComponent(
                 onClick = {},
-                isIcon = Icons.listNested(),
+                isIcon = Icons.stars(),
                 backgroundColor = MaterialTheme.colorScheme.secondary,
                 textColor = MaterialTheme.colorScheme.background
             )}
@@ -126,7 +132,9 @@ fun InteractiveMenu(
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxWidth(0.55f)
-            .background(MaterialTheme.colorScheme.tertiary)
+            .background(
+                MaterialTheme.colorScheme.tertiary,
+                shape = RoundedCornerShape(4.dp))
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             itemsIndexed(levels) { index, level ->
@@ -165,7 +173,8 @@ fun SemesterItem(
                         subject.groups,
                         viewModel
                     )
-                }
+                },
+                verticalLine = true
             )
         }
     }
@@ -184,6 +193,7 @@ fun SubjectItem(
     Column {
         ItemCard(
             name = subjectName,
+            textStyle = MaterialTheme.typography.text,
             onClick = { viewModel.onClickSubject(subjectCode) },
         )
         if (isExpanded) {
@@ -195,7 +205,8 @@ fun SubjectItem(
                         subjectName = subjectName,
                         viewModel = viewModel
                     )
-                }
+                },
+                verticalLine = true
             )
         }
     }
@@ -212,12 +223,13 @@ fun GroupItem(
     ItemCard(
         name = group.teacher,
         onClick = { viewModel.selectGroup(group, subjectName) },
+        textStyle = MaterialTheme.typography.text,
         containerColor = if (isSelected)
-            MaterialTheme.colorScheme.primary
+            MaterialTheme.colorScheme.secondary
         else
-            MaterialTheme.colorScheme.background,
+            MaterialTheme.colorScheme.tertiary,
         contentColor = if (isSelected)
-            MaterialTheme.colorScheme.onPrimary
+            MaterialTheme.colorScheme.onSecondary
         else
             MaterialTheme.colorScheme.onSurface
     )
