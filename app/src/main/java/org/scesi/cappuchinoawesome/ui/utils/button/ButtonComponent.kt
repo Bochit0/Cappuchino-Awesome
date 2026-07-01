@@ -1,13 +1,13 @@
 package org.scesi.cappuchinoawesome.ui.utils.button
 
 import androidx.compose.animation.Crossfade
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -28,14 +28,15 @@ fun ButtonComponent(
         containerColor = backgroundColor,
         contentColor = textColor
     )
-    Button(
-        onClick = onClick,
-        modifier = modifier,
-        colors = colorButton,
-        shape = RoundedCornerShape(4.dp)
-    ) {
-        Crossfade(targetState = isIcon, label = "ButtonIconCrossfade") { icon ->
-            if (icon != null) {
+    Crossfade(targetState = isIcon, label = "ButtonIconCrossfade") { icon ->
+        if (icon !=null) {
+            IconButton(
+                onClick = onClick,
+                modifier = modifier.size(40.dp),
+                colors = IconButtonDefaults.iconButtonColors(
+                    containerColor = backgroundColor,
+                    contentColor = textColor)
+            ) {
                 Icon(
                     imageVector = icon,
                     contentDescription = null,
@@ -43,12 +44,15 @@ fun ButtonComponent(
                 )
             }
         }
+    }
 
-        if (isIcon != null && isText != null) {
-            Spacer(modifier = Modifier.width(8.dp))
-        }
-
-        if (isText != null) {
+    if (isText != null) {
+        Button(
+            onClick = onClick,
+            modifier = modifier,
+            colors = colorButton,
+            shape = RoundedCornerShape(4.dp)
+        ) {
             Text(text = isText)
         }
     }
