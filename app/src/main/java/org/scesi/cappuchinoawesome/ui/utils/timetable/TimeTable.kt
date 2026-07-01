@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -22,6 +23,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -106,24 +109,48 @@ fun TimeTable(selectedGroup: List<GroupSubject> = emptyList()){
 
 @Composable
 fun HourColumn(rowHeights: List<Dp>){
-    Column(modifier = Modifier
-        .width(56.dp)
-        .padding(top = 32.dp)
+    Row(
+        modifier =
+            Modifier.fillMaxHeight(),
+        verticalAlignment = Alignment.Top
     ) {
-        hours.forEachIndexed { index ,hour ->
-            Box(
-                modifier = Modifier
-                    .height(rowHeights[index])
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.TopCenter
-            ) {
-                Text(
-                    text = hour,
-                    style = MaterialTheme.typography.subtitle,
-                    color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.6f)
-                )
+        Column(
+            modifier = Modifier
+                .width(56.dp)
+                .padding(top = 32.dp)
+        ) {
+            val lineColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.7f)
+            hours.forEachIndexed { index, hour ->
+                Box(
+                    modifier = Modifier
+                        .height(rowHeights[index])
+                        .fillMaxWidth()
+                        .drawBehind {
+                        drawLine(
+                            color = lineColor,
+                            start = Offset(0f, size.height),
+                            end = Offset(size.width, size.height),
+                            strokeWidth = 6.dp.toPx()
+                        )
+                    },
+                    contentAlignment = Alignment.TopCenter
+                ) {
+                    Text(
+                        text = hour,
+                        style = MaterialTheme.typography.subtitle,
+                        color = MaterialTheme.colorScheme.outline
+                    )
+                }
             }
         }
+        Box(
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(4.dp)
+                .background(
+                    MaterialTheme.colorScheme.secondary
+                )
+        )
     }
 }
 
@@ -134,18 +161,24 @@ fun DayColumn(
     rowHeights: List<Dp>,
     selectedGroups: List<GroupSubject>
 ){
-    Column(modifier = Modifier.width(96.dp)) {
+    Column(
+        modifier = Modifier
+            .width(96.dp)
+            .padding(horizontal = 4.dp)
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(32.dp)
-                .background(MaterialTheme.colorScheme.secondary),
-            contentAlignment = Alignment.Center
+                .background(
+                    MaterialTheme.colorScheme.primary,
+                    RoundedCornerShape(4.dp)),
+            contentAlignment = Alignment.Center,
         ) {
             Text(
                 text = day.name,
                 style = MaterialTheme.typography.subtitle,
-                color = MaterialTheme.colorScheme.background
+                color = MaterialTheme.colorScheme.tertiary
             )
         }
 

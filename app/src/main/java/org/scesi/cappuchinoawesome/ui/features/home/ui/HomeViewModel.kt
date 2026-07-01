@@ -25,9 +25,8 @@ class HomeViewModel : ViewModel() {
     init {
         loadCareers()
     }
-    fun onChangeTextSearch(textValue: String){
-        _searchText.value = textValue
-        _isOpen.value = textValue.isNotEmpty()
+    fun toggleCarrers(){
+        _isOpen.value = !_isOpen.value
     }
 
     fun loadCareers() {

@@ -23,7 +23,7 @@ val Typography.subtitle: TextStyle
     get() = TextStyle(
         fontFamily = FontFamily.SansSerif,
         fontWeight = FontWeight.Medium,
-        fontSize = 18.sp,
+        fontSize = 19.sp,
         lineHeight = 16.sp,
         letterSpacing = 0.5.sp
     )
@@ -32,7 +32,7 @@ val Typography.title: TextStyle
     get() = TextStyle(
         fontFamily = FontFamily.Monospace,
         fontWeight = FontWeight.Normal,
-        fontSize = 25.sp,
+        fontSize = 24.sp,
         lineHeight = 28.sp,
         letterSpacing = 0.sp
     )
@@ -41,7 +41,7 @@ val Typography.text: TextStyle
     get() = TextStyle(
         fontFamily = FontFamily.Serif,
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
+        fontSize = 14.sp,
         lineHeight = 14.sp,
         letterSpacing = 0.sp
     )

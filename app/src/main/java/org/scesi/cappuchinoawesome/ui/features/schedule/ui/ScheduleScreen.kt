@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,6 +29,7 @@ import org.scesi.cappuchinoawesome.ui.network.data.Group
 import org.scesi.cappuchinoawesome.ui.network.data.Level
 import org.scesi.cappuchinoawesome.ui.network.data.StatesControl
 import org.scesi.cappuchinoawesome.ui.network.data.Subject
+import org.scesi.cappuchinoawesome.ui.theme.text
 import org.scesi.cappuchinoawesome.ui.utils.button.ButtonComponent
 import org.scesi.cappuchinoawesome.ui.utils.dropdown.DropDownComponent
 import org.scesi.cappuchinoawesome.ui.utils.header.HeaderComponent
@@ -72,24 +74,28 @@ fun Schedule(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.secondary)
+                .background(MaterialTheme.colorScheme.primary)
                 .windowInsetsTopHeight(WindowInsets.statusBars)
         )
         HeaderComponent(
             titleHeader = titleHeader,
-            backgroundColor = MaterialTheme.colorScheme.secondary,
-            titleColor = MaterialTheme.colorScheme.background,
-            leftAction = {ButtonComponent(
+            backgroundColor = MaterialTheme.colorScheme.primary,
+            titleColor = MaterialTheme.colorScheme.tertiary,
+            leftAction = { ButtonComponent(
                 onClick = { viewModel.toggleMenu() },
-                isIcon = Icons.listNested(color = MaterialTheme.colorScheme.secondary),
-                backgroundColor = MaterialTheme.colorScheme.secondary,
-                textColor = MaterialTheme.colorScheme.background
+                isIcon = if (openMenu) {
+                    Icons.listNested(color = MaterialTheme.colorScheme.tertiary)
+                } else {
+                    Icons.list(color = MaterialTheme.colorScheme.tertiary)
+                },
+                backgroundColor = MaterialTheme.colorScheme.primary,
+                textColor = MaterialTheme.colorScheme.tertiary
             )},
             rightAction = { ButtonComponent(
                 onClick = {},
-                isIcon = Icons.listNested(),
-                backgroundColor = MaterialTheme.colorScheme.secondary,
-                textColor = MaterialTheme.colorScheme.background
+                isIcon = Icons.stars(),
+                backgroundColor = MaterialTheme.colorScheme.primary,
+                textColor = MaterialTheme.colorScheme.tertiary
             )}
         )
 
@@ -126,7 +132,9 @@ fun InteractiveMenu(
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxWidth(0.55f)
-            .background(MaterialTheme.colorScheme.tertiary)
+            .background(
+                MaterialTheme.colorScheme.onSecondary,
+                shape = RoundedCornerShape(4.dp))
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             itemsIndexed(levels) { index, level ->
@@ -165,7 +173,8 @@ fun SemesterItem(
                         subject.groups,
                         viewModel
                     )
-                }
+                },
+                verticalLine = true
             )
         }
     }
@@ -184,7 +193,9 @@ fun SubjectItem(
     Column {
         ItemCard(
             name = subjectName,
+            textStyle = MaterialTheme.typography.text,
             onClick = { viewModel.onClickSubject(subjectCode) },
+            contentColor = MaterialTheme.colorScheme.tertiary
         )
         if (isExpanded) {
             DropDownComponent(
@@ -195,7 +206,8 @@ fun SubjectItem(
                         subjectName = subjectName,
                         viewModel = viewModel
                     )
-                }
+                },
+                verticalLine = true
             )
         }
     }
@@ -212,13 +224,14 @@ fun GroupItem(
     ItemCard(
         name = group.teacher,
         onClick = { viewModel.selectGroup(group, subjectName) },
+        textStyle = MaterialTheme.typography.text,
         containerColor = if (isSelected)
-            MaterialTheme.colorScheme.primary
+            MaterialTheme.colorScheme.secondary
         else
-            MaterialTheme.colorScheme.background,
+            MaterialTheme.colorScheme.primary,
         contentColor = if (isSelected)
-            MaterialTheme.colorScheme.onPrimary
+            MaterialTheme.colorScheme.tertiary
         else
-            MaterialTheme.colorScheme.onSurface
+            MaterialTheme.colorScheme.tertiary
     )
 }
