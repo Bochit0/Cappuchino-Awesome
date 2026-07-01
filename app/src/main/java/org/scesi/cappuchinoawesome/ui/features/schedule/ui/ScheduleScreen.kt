@@ -3,10 +3,12 @@ package org.scesi.cappuchinoawesome.ui.features.schedule.ui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.lazy.LazyColumn
@@ -18,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.scesi.cappuchinoawesome.ui.network.data.DetailCareer
@@ -25,12 +28,12 @@ import org.scesi.cappuchinoawesome.ui.network.data.Group
 import org.scesi.cappuchinoawesome.ui.network.data.Level
 import org.scesi.cappuchinoawesome.ui.network.data.StatesControl
 import org.scesi.cappuchinoawesome.ui.network.data.Subject
-import org.scesi.cappuchinoawesome.ui.theme.text
 import org.scesi.cappuchinoawesome.ui.utils.button.ButtonComponent
 import org.scesi.cappuchinoawesome.ui.utils.dropdown.DropDownComponent
 import org.scesi.cappuchinoawesome.ui.utils.header.HeaderComponent
 import org.scesi.cappuchinoawesome.ui.utils.icons.Icons
 import org.scesi.cappuchinoawesome.ui.utils.itemcard.ItemCard
+import org.scesi.cappuchinoawesome.ui.utils.timetable.TimeTable
 
 @Composable
 fun ScheduleScreen(
@@ -55,6 +58,7 @@ fun Schedule(
     detailState: StatesControl<DetailCareer>
 ){
     val openMenu by viewModel.openSemesters.collectAsStateWithLifecycle()
+    val selectedGroups by viewModel.selectedGroups.collectAsStateWithLifecycle()
     Column(modifier = modifier
         .fillMaxSize()
     ) {
@@ -89,21 +93,28 @@ fun Schedule(
             )}
         )
 
-        if(openMenu){
-            when (detailState) {
-                is StatesControl.Success -> InteractiveMenu(
-                    viewModel = viewModel,
-                    levels = detailState.data.levels
-                )
-                is StatesControl.Loading -> CircularProgressIndicator()
-                is StatesControl.Error -> Text(text = detailState.message)
-                is StatesControl.Empty -> Text(text = "Sin datos")
+        Spacer(Modifier.height(30.dp))
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(1f)
+        ) {
+            TimeTable(selectedGroup = selectedGroups)
+
+            if (openMenu) {
+                when (detailState) {
+                    is StatesControl.Success -> InteractiveMenu(
+                        viewModel = viewModel,
+                        levels = detailState.data.levels
+                    )
+
+                    is StatesControl.Loading -> CircularProgressIndicator()
+                    is StatesControl.Error -> Text(text = detailState.message)
+                    is StatesControl.Empty -> Text(text = "Sin datos")
+                }
             }
         }
-
-        TableTime()
-
-
     }
 }
 @Composable
@@ -115,11 +126,7 @@ fun InteractiveMenu(
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxWidth(0.55f)
-            .background(MaterialTheme
-                .colorScheme
-                .tertiary
-                .copy(alpha = 0.67f)
-            )
+            .background(MaterialTheme.colorScheme.tertiary)
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             itemsIndexed(levels) { index, level ->
@@ -158,8 +165,7 @@ fun SemesterItem(
                         subject.groups,
                         viewModel
                     )
-                },
-                verticalLine = true
+                }
             )
         }
     }
@@ -184,22 +190,35 @@ fun SubjectItem(
             DropDownComponent(
                 items = groups,
                 itemContent = { group ->
-                    GroupItem(teacherName = group.teacher)
-                },
-                verticalLine = true
+                    GroupItem(
+                        group = group,
+                        subjectName = subjectName,
+                        viewModel = viewModel
+                    )
+                }
             )
         }
     }
 }
 
 @Composable
-fun GroupItem(teacherName: String){
+fun GroupItem(
+    group: Group,
+    subjectName: String,
+    viewModel: ScheduleViewModel
+){
+    val selectedGroups by viewModel.selectedGroups.collectAsStateWithLifecycle()
+    val isSelected = viewModel.isGroupSelected(group, selectedGroups)
     ItemCard(
-        name = teacherName,
-        textStyle = MaterialTheme.typography.text,
-        onClick = {},
+        name = group.teacher,
+        onClick = { viewModel.selectGroup(group, subjectName) },
+        containerColor = if (isSelected)
+            MaterialTheme.colorScheme.primary
+        else
+            MaterialTheme.colorScheme.background,
+        contentColor = if (isSelected)
+            MaterialTheme.colorScheme.onPrimary
+        else
+            MaterialTheme.colorScheme.onSurface
     )
 }
-
-@Composable
-fun TableTime(){}
