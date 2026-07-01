@@ -119,7 +119,7 @@ fun HourColumn(rowHeights: List<Dp>){
                 .width(56.dp)
                 .padding(top = 32.dp)
         ) {
-            val lineColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.7f)
+            val lineColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.7f)
             hours.forEachIndexed { index, hour ->
                 Box(
                     modifier = Modifier
@@ -138,7 +138,7 @@ fun HourColumn(rowHeights: List<Dp>){
                     Text(
                         text = hour,
                         style = MaterialTheme.typography.subtitle,
-                        color = MaterialTheme.colorScheme.secondary
+                        color = MaterialTheme.colorScheme.outline
                     )
                 }
             }
@@ -171,14 +171,14 @@ fun DayColumn(
                 .fillMaxWidth()
                 .height(32.dp)
                 .background(
-                    MaterialTheme.colorScheme.secondary,
+                    MaterialTheme.colorScheme.primary,
                     RoundedCornerShape(4.dp)),
             contentAlignment = Alignment.Center,
         ) {
             Text(
                 text = day.name,
                 style = MaterialTheme.typography.subtitle,
-                color = MaterialTheme.colorScheme.background
+                color = MaterialTheme.colorScheme.tertiary
             )
         }
 

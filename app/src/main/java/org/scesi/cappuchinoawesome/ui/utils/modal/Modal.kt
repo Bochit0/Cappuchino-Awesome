@@ -35,8 +35,8 @@ fun Modal(
                 .fillMaxWidth()
                 .wrapContentHeight(),
             colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f),
-                contentColor = MaterialTheme.colorScheme.background
+                containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
+                contentColor = MaterialTheme.colorScheme.tertiary
             ),
             shape = RoundedCornerShape(10.dp)
         ) {
@@ -75,6 +75,6 @@ fun HorizontalLine(modifier : Modifier = Modifier){
     HorizontalDivider(
         modifier = modifier.padding(vertical = 5.dp),
         thickness = 3.dp,
-        color = MaterialTheme.colorScheme.background.copy(alpha = 0.3f)
+        color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.3f)
     )
 }

@@ -81,7 +81,7 @@ fun Home(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
-                    imageVector = customWaveBottom(color = MaterialTheme.colorScheme.secondary),
+                    imageVector = customWaveBottom(color = MaterialTheme.colorScheme.primary),
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -110,11 +110,11 @@ fun TitleApp(){
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = "Cappuchino",
-            color = MaterialTheme.colorScheme.tertiary,
+            color = MaterialTheme.colorScheme.outline,
             style = MaterialTheme.typography.titleApp)
         Text(
             text = "Awesome",
-            color = MaterialTheme.colorScheme.secondary,
+            color = MaterialTheme.colorScheme.primary,
             style = MaterialTheme.typography.subtitleApp)
     }
 }
@@ -127,8 +127,8 @@ fun CarrerSelectButton(
         onClick = onClick,
         modifier = Modifier.fillMaxWidth(),
         isText =  "Ver Carreras" ,
-        backgroundColor = MaterialTheme.colorScheme.secondary,
-        textColor = MaterialTheme.colorScheme.background
+        backgroundColor = MaterialTheme.colorScheme.primary,
+        textColor = MaterialTheme.colorScheme.tertiary
     )
 
 }
@@ -145,7 +145,7 @@ fun DropDownCarrers(
                 modifier = Modifier.fillMaxWidth().padding(24.dp),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator(color = MaterialTheme.colorScheme.secondary)
+                CircularProgressIndicator(color = MaterialTheme.colorScheme.tertiary)
             }
         }
 
@@ -177,7 +177,7 @@ fun DropDownCarrers(
                 Text(
                     text = stateCareer.message,
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.error
+                    color = MaterialTheme.colorScheme.tertiary
                 )
             }
         }
@@ -213,8 +213,8 @@ fun CareerCard(
         onClick = onClick,
         shape = RoundedCornerShape(6.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondary,
-            contentColor = MaterialTheme.colorScheme.background
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.tertiary
         )
     ) {
         Box(
@@ -237,6 +237,6 @@ fun HorizontalLine(modifier : Modifier = Modifier){
     HorizontalDivider(
         modifier = modifier.padding(vertical = 8.dp),
         thickness = 3.dp,
-        color = MaterialTheme.colorScheme.tertiary
+        color = MaterialTheme.colorScheme.outline
     )
 }

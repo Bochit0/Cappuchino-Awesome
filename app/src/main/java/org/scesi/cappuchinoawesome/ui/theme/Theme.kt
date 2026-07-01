@@ -14,14 +14,20 @@ import androidx.compose.material3.Typography
 
 private val DarkColorScheme = darkColorScheme(
     primary = SpaceIndigo,
+    onPrimary = TiffanyBlue,
     secondary = DarkIndigo,
-    tertiary = TiffanyBlue
+    onSecondary = SpaceIndigo,
+    tertiary = TiffanyBlue,
+    background = DarkIndigo,
+    outline = TiffanyBlue
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Gray,
-    secondary = DeepPurple,
-    tertiary = StormyGreen,
+    primary = DeepPurple,
+    onPrimary = White,
+    secondary = StormyGreen,
+    onSecondary = StormyGreen,
+    tertiary = White,
     background = White,
     outline = DeepPurple
 
@@ -36,9 +42,9 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun CappuchinoawesomeTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = true,
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

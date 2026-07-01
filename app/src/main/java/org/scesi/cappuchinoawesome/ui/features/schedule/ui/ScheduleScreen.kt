@@ -74,28 +74,28 @@ fun Schedule(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.secondary)
+                .background(MaterialTheme.colorScheme.primary)
                 .windowInsetsTopHeight(WindowInsets.statusBars)
         )
         HeaderComponent(
             titleHeader = titleHeader,
-            backgroundColor = MaterialTheme.colorScheme.secondary,
-            titleColor = MaterialTheme.colorScheme.background,
+            backgroundColor = MaterialTheme.colorScheme.primary,
+            titleColor = MaterialTheme.colorScheme.tertiary,
             leftAction = { ButtonComponent(
                 onClick = { viewModel.toggleMenu() },
                 isIcon = if (openMenu) {
-                    Icons.listNested(color = MaterialTheme.colorScheme.background)
+                    Icons.listNested(color = MaterialTheme.colorScheme.tertiary)
                 } else {
-                    Icons.list(color = MaterialTheme.colorScheme.background)
+                    Icons.list(color = MaterialTheme.colorScheme.tertiary)
                 },
-                backgroundColor = MaterialTheme.colorScheme.secondary,
-                textColor = MaterialTheme.colorScheme.background
+                backgroundColor = MaterialTheme.colorScheme.primary,
+                textColor = MaterialTheme.colorScheme.tertiary
             )},
             rightAction = { ButtonComponent(
                 onClick = {},
                 isIcon = Icons.stars(),
-                backgroundColor = MaterialTheme.colorScheme.secondary,
-                textColor = MaterialTheme.colorScheme.background
+                backgroundColor = MaterialTheme.colorScheme.primary,
+                textColor = MaterialTheme.colorScheme.tertiary
             )}
         )
 
@@ -133,7 +133,7 @@ fun InteractiveMenu(
             .fillMaxHeight()
             .fillMaxWidth(0.55f)
             .background(
-                MaterialTheme.colorScheme.tertiary,
+                MaterialTheme.colorScheme.onSecondary,
                 shape = RoundedCornerShape(4.dp))
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -195,6 +195,7 @@ fun SubjectItem(
             name = subjectName,
             textStyle = MaterialTheme.typography.text,
             onClick = { viewModel.onClickSubject(subjectCode) },
+            contentColor = MaterialTheme.colorScheme.tertiary
         )
         if (isExpanded) {
             DropDownComponent(
@@ -227,10 +228,10 @@ fun GroupItem(
         containerColor = if (isSelected)
             MaterialTheme.colorScheme.secondary
         else
-            MaterialTheme.colorScheme.tertiary,
+            MaterialTheme.colorScheme.primary,
         contentColor = if (isSelected)
-            MaterialTheme.colorScheme.onSecondary
+            MaterialTheme.colorScheme.tertiary
         else
-            MaterialTheme.colorScheme.onSurface
+            MaterialTheme.colorScheme.tertiary
     )
 }
