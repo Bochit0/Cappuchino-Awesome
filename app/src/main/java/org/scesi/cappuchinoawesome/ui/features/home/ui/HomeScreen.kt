@@ -28,8 +28,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.scesi.cappuchinoawesome.ui.navigation.Routes
-import org.scesi.cappuchinoawesome.ui.network.data.Career
-import org.scesi.cappuchinoawesome.ui.network.data.StatesControl
+import org.scesi.cappuchinoawesome.network.data.Career
+import org.scesi.cappuchinoawesome.network.data.StatesControl
 import org.scesi.cappuchinoawesome.ui.theme.subtitleApp
 import org.scesi.cappuchinoawesome.ui.theme.title
 import org.scesi.cappuchinoawesome.ui.theme.titleApp
@@ -90,7 +90,7 @@ fun Home(
                     contentScale = ContentScale.FillBounds
                 )
                 CarrerSelectButton(
-                    onClick = { viewModel.toggleCarrers() }
+                    onClick = { viewModel.toggleCareers() }
                 )
                 Spacer(Modifier.height(5.dp))
                 if (dropList) {

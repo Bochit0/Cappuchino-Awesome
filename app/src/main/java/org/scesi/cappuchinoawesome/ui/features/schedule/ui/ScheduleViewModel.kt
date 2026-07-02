@@ -6,16 +6,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import org.scesi.cappuchinoawesome.ui.features.schedule.data.ScheduleService
-import org.scesi.cappuchinoawesome.ui.network.data.DetailCareer
-import org.scesi.cappuchinoawesome.ui.network.data.Group
-import org.scesi.cappuchinoawesome.ui.network.data.GroupSubject
-import org.scesi.cappuchinoawesome.ui.network.data.StatesControl
+import org.scesi.cappuchinoawesome.network.ApiService
+import org.scesi.cappuchinoawesome.network.RetrofitClient
+import org.scesi.cappuchinoawesome.network.data.DetailCareer
+import org.scesi.cappuchinoawesome.network.data.Group
+import org.scesi.cappuchinoawesome.network.data.GroupSubject
+import org.scesi.cappuchinoawesome.network.data.StatesControl
 
-class ScheduleViewModel: ViewModel() {
-
-    private val detailService = ScheduleService()
-
+class ScheduleViewModel(
+    private val apiService: ApiService = RetrofitClient.retrofit
+): ViewModel() {
     private val _detailState = MutableStateFlow<StatesControl <DetailCareer>>(StatesControl.Loading)
     private val _openSemesters = MutableStateFlow<Boolean>(false)
     private val _openTeacherIndex = MutableStateFlow<Int?>(null)
@@ -45,11 +45,11 @@ class ScheduleViewModel: ViewModel() {
         viewModelScope.launch {
             _detailState.value = StatesControl.Loading
             try {
-                val result = detailService.getDetailCareer(code)
-                _detailState.value = if (result.levels.isEmpty()){
+                val detail = apiService.getDetailCareer(code)
+                _detailState.value = if (detail.levels.isEmpty()){
                     StatesControl.Empty
                 }else {
-                    StatesControl.Success(result)
+                    StatesControl.Success(detail)
                 }
             }catch(e: Exception) {
                 _detailState.value = StatesControl.Error("No hay contenido")

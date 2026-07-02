@@ -1,7 +1,7 @@
-package org.scesi.cappuchinoawesome.ui.network
+package org.scesi.cappuchinoawesome.network
 
-import org.scesi.cappuchinoawesome.ui.network.data.Career
-import org.scesi.cappuchinoawesome.ui.network.data.DetailCareer
+import org.scesi.cappuchinoawesome.network.data.Career
+import org.scesi.cappuchinoawesome.network.data.DetailCareer
 import retrofit2.http.GET
 import retrofit2.http.Path
 
