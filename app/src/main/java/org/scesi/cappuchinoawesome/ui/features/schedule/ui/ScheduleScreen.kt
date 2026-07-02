@@ -52,7 +52,12 @@ fun ScheduleScreen(
     val detailState by viewModel.detailState.collectAsStateWithLifecycle()
 
     Box(modifier = Modifier.fillMaxSize()){
-        Schedule(viewModel, detailState = detailState, onNavigate = onNavigate)
+        Schedule(
+            viewModel,
+            detailState = detailState,
+            onNavigate = onNavigate,
+            onBackClick = onBackClick
+        )
     }
 }
 
@@ -61,7 +66,8 @@ fun Schedule(
     viewModel: ScheduleViewModel,
     modifier: Modifier = Modifier,
     detailState: StatesControl<DetailCareer>,
-    onNavigate: (Routes) -> Unit
+    onNavigate: (Routes) -> Unit,
+    onBackClick: () -> Unit
 ){
     val openMenu by viewModel.openSemesters.collectAsStateWithLifecycle()
     val selectedGroups by viewModel.selectedGroups.collectAsStateWithLifecycle()
@@ -98,6 +104,15 @@ fun Schedule(
             rightAction = { ButtonComponent(
                 onClick = {onNavigate(Routes.AboutMe)},
                 isIcon = Icon.stars(),
+                backgroundColor = MaterialTheme.colorScheme.primary,
+                textColor = MaterialTheme.colorScheme.tertiary
+            )},
+            otherAction = { ButtonComponent(
+                onClick = {
+                    viewModel.rebootTable()
+                    onBackClick()
+                },
+                isIcon = Icon.boxArrowLeft(),
                 backgroundColor = MaterialTheme.colorScheme.primary,
                 textColor = MaterialTheme.colorScheme.tertiary
             )}
