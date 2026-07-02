@@ -8,12 +8,14 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import org.scesi.cappuchinoawesome.ui.theme.subtitle
 
 @Composable
 fun ButtonComponent(
@@ -53,7 +55,10 @@ fun ButtonComponent(
             colors = colorButton,
             shape = RoundedCornerShape(4.dp)
         ) {
-            Text(text = isText)
+            Text(
+                text = isText,
+                style = MaterialTheme.typography.subtitle
+            )
         }
     }
 }

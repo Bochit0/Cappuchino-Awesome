@@ -110,7 +110,7 @@ fun AboutMe(
                             "faltan pequeñitos detalles como la persistencia con el uso de Room e inyeccion de dependencias, " +
                             " cosas menores UwU, pero el provecho lo saqué yo al aprender una gran especialización como lo es desarrollo mobile." +
                             " Gracias SCESI por el apoyo y el conocimiento que me dieron.",
-                    style = MaterialTheme.typography.text.copy(lineHeight = 26.sp)
+                    style = MaterialTheme.typography.text.copy(lineHeight = 22.sp)
                 )
             }
 
@@ -126,7 +126,7 @@ fun AboutMe(
                 ) {
                     Text(
                         text =  "Mi nombre es Jhosua, un estudiante de Ingenieria Informatica - UMSS, un gusto por el software libre y un hambre por el conocimiento",
-                        style = MaterialTheme.typography.text.copy(lineHeight = 26.sp)
+                        style = MaterialTheme.typography.text.copy(lineHeight = 22.sp)
                     )
                 }
 

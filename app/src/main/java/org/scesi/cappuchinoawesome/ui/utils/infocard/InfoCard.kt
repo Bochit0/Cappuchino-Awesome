@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import org.scesi.cappuchinoawesome.ui.theme.text
 import org.scesi.cappuchinoawesome.ui.utils.icons.Icon
 
@@ -45,7 +46,7 @@ fun InfoCard(
             ) {
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.text,
+                    style = MaterialTheme.typography.text.copy(lineHeight = 26.sp),
                     color = MaterialTheme.colorScheme.tertiary
                 )
                 HorizontalDivider(

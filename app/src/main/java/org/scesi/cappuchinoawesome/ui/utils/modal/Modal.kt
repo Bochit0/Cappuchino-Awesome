@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import org.scesi.cappuchinoawesome.ui.theme.subtitle
 
 @Composable
 fun Modal(
@@ -47,23 +48,27 @@ fun Modal(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = textHeader
+                    text = textHeader,
+                    style = MaterialTheme.typography.subtitle
                 )
                 Spacer(Modifier.height(10.dp))
                 HorizontalLine(modifier)
                 Spacer(Modifier.height(10.dp))
                 if(!isClass){
                     Text(
-                        text = "AUXILIATURA"
+                        text = "AUXILIATURA",
+                        style = MaterialTheme.typography.subtitle
                     )
                 }
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = "AULA: $textMedium"
+                    text = "AULA: $textMedium",
+                    style = MaterialTheme.typography.subtitle
                 )
                 Spacer(Modifier.height(17.dp))
                 Text(
-                    text = textFooter
+                    text = textFooter,
+                    style = MaterialTheme.typography.subtitle
                 )
             }
         }

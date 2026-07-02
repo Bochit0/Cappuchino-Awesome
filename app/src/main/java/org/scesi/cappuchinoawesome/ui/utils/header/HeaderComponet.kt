@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import org.scesi.cappuchinoawesome.ui.theme.title
 import org.scesi.cappuchinoawesome.ui.utils.icons.Icon.customWaveTop
 
 @Composable
@@ -52,7 +53,7 @@ fun HeaderComponent(
                 Text(
                     text = titleHeader,
                     color = titleColor,
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.title,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f)

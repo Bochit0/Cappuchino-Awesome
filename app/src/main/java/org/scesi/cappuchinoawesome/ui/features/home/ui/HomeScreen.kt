@@ -30,6 +30,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import org.scesi.cappuchinoawesome.ui.navigation.Routes
 import org.scesi.cappuchinoawesome.network.data.Career
 import org.scesi.cappuchinoawesome.network.data.StatesControl
+import org.scesi.cappuchinoawesome.ui.theme.subtitle
 import org.scesi.cappuchinoawesome.ui.theme.subtitleApp
 import org.scesi.cappuchinoawesome.ui.theme.title
 import org.scesi.cappuchinoawesome.ui.theme.titleApp
@@ -236,7 +237,7 @@ fun CareerCard(
         ) {
             Text(
                 text = careerName,
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.subtitle
             )
         }
     }

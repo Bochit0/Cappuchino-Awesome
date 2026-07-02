@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import org.scesi.cappuchinoawesome.ui.utils.button.ButtonComponent
 import org.scesi.cappuchinoawesome.ui.utils.header.HeaderComponent
 import org.scesi.cappuchinoawesome.ui.utils.icons.Icon
@@ -68,7 +69,7 @@ fun Settings(
         Spacer(Modifier.height(60.dp))
         ButtonComponent(
             modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
-            onClick = {},
+            onClick = { settingsViewModel.changeTypo() },
             isText = "Cambiar tipografia",
             backgroundColor = MaterialTheme.colorScheme.primary,
             textColor = MaterialTheme.colorScheme.tertiary
