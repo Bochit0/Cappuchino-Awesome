@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import org.scesi.cappuchinoawesome.ui.utils.icons.Icons.customWaveTop
+import org.scesi.cappuchinoawesome.ui.utils.icons.Icon.customWaveTop
 
 @Composable
 fun HeaderComponent(
@@ -29,8 +29,9 @@ fun HeaderComponent(
     backgroundColor: Color,
     titleColor: Color,
     isWave: Boolean = true,
-    leftAction: @Composable () -> Unit = {},
-    rightAction: @Composable () -> Unit = {}
+    leftAction: @Composable (() -> Unit)? = null,
+    rightAction: @Composable (() -> Unit)? = null,
+    otherAction: @Composable (() -> Unit)? = null
 ){
     Column(modifier = modifier.fillMaxWidth()) {
         Box(
@@ -43,9 +44,10 @@ fun HeaderComponent(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                leftAction()
-
-                Spacer(modifier = Modifier.width(16.dp))
+                if (leftAction != null) {
+                    leftAction()
+                    Spacer(modifier = Modifier.width(16.dp))
+                }
 
                 Text(
                     text = titleHeader,
@@ -56,10 +58,22 @@ fun HeaderComponent(
                     modifier = Modifier.weight(1f)
                 )
 
-                Spacer(modifier = Modifier.width(16.dp))
+                if (rightAction != null || otherAction != null) {
+                    Spacer(modifier = Modifier.width(16.dp))
 
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    rightAction()
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        if (rightAction != null) {
+                            rightAction()
+                        }
+
+                        if (rightAction != null && otherAction != null) {
+                            Spacer(modifier = Modifier.width(8.dp))
+                        }
+
+                        if (otherAction != null) {
+                            otherAction()
+                        }
+                    }
                 }
             }
         }

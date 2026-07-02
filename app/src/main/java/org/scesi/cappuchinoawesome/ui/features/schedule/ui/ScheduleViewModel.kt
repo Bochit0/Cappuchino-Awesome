@@ -28,6 +28,9 @@ class ScheduleViewModel: ViewModel() {
     val openSubjectIndex : StateFlow<String?> = _openSubjectIndex.asStateFlow()
     val selectedGroups : StateFlow< List <GroupSubject>> = _selectedGroups.asStateFlow()
 
+    fun rebootTable(){
+        _selectedGroups.value = emptyList()
+    }
     fun toggleMenu(){
         _openSemesters.value = !_openSemesters.value
     }

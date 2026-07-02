@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.scesi.cappuchinoawesome.ui.navigation.Routes
 import org.scesi.cappuchinoawesome.ui.network.data.DetailCareer
 import org.scesi.cappuchinoawesome.ui.network.data.Group
 import org.scesi.cappuchinoawesome.ui.network.data.Level
@@ -33,14 +34,16 @@ import org.scesi.cappuchinoawesome.ui.theme.text
 import org.scesi.cappuchinoawesome.ui.utils.button.ButtonComponent
 import org.scesi.cappuchinoawesome.ui.utils.dropdown.DropDownComponent
 import org.scesi.cappuchinoawesome.ui.utils.header.HeaderComponent
-import org.scesi.cappuchinoawesome.ui.utils.icons.Icons
+import org.scesi.cappuchinoawesome.ui.utils.icons.Icon
 import org.scesi.cappuchinoawesome.ui.utils.itemcard.ItemCard
 import org.scesi.cappuchinoawesome.ui.utils.timetable.TimeTable
 
 @Composable
 fun ScheduleScreen(
     viewModel: ScheduleViewModel = viewModel(),
-    careerCode: Int
+    careerCode: Int,
+    onNavigate: (Routes) -> Unit,
+    onBackClick: () -> Unit
 ){
     LaunchedEffect(careerCode) {
         viewModel.loadDetail(careerCode)
@@ -49,7 +52,12 @@ fun ScheduleScreen(
     val detailState by viewModel.detailState.collectAsStateWithLifecycle()
 
     Box(modifier = Modifier.fillMaxSize()){
-        Schedule(viewModel, detailState = detailState)
+        Schedule(
+            viewModel,
+            detailState = detailState,
+            onNavigate = onNavigate,
+            onBackClick = onBackClick
+        )
     }
 }
 
@@ -57,7 +65,9 @@ fun ScheduleScreen(
 fun Schedule(
     viewModel: ScheduleViewModel,
     modifier: Modifier = Modifier,
-    detailState: StatesControl<DetailCareer>
+    detailState: StatesControl<DetailCareer>,
+    onNavigate: (Routes) -> Unit,
+    onBackClick: () -> Unit
 ){
     val openMenu by viewModel.openSemesters.collectAsStateWithLifecycle()
     val selectedGroups by viewModel.selectedGroups.collectAsStateWithLifecycle()
@@ -84,16 +94,25 @@ fun Schedule(
             leftAction = { ButtonComponent(
                 onClick = { viewModel.toggleMenu() },
                 isIcon = if (openMenu) {
-                    Icons.listNested(color = MaterialTheme.colorScheme.tertiary)
+                    Icon.listNested(color = MaterialTheme.colorScheme.tertiary)
                 } else {
-                    Icons.list(color = MaterialTheme.colorScheme.tertiary)
+                    Icon.list(color = MaterialTheme.colorScheme.tertiary)
                 },
                 backgroundColor = MaterialTheme.colorScheme.primary,
                 textColor = MaterialTheme.colorScheme.tertiary
             )},
             rightAction = { ButtonComponent(
-                onClick = {},
-                isIcon = Icons.stars(),
+                onClick = {onNavigate(Routes.AboutMe)},
+                isIcon = Icon.stars(),
+                backgroundColor = MaterialTheme.colorScheme.primary,
+                textColor = MaterialTheme.colorScheme.tertiary
+            )},
+            otherAction = { ButtonComponent(
+                onClick = {
+                    viewModel.rebootTable()
+                    onBackClick()
+                },
+                isIcon = Icon.boxArrowLeft(),
                 backgroundColor = MaterialTheme.colorScheme.primary,
                 textColor = MaterialTheme.colorScheme.tertiary
             )}

@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
+import org.scesi.cappuchinoawesome.ui.features.aboutme.AboutMeScreen
 import org.scesi.cappuchinoawesome.ui.features.home.ui.HomeScreen
 import org.scesi.cappuchinoawesome.ui.features.schedule.ui.ScheduleScreen
 
@@ -20,7 +21,16 @@ fun NavApp(modifier: Modifier = Modifier){
                 HomeScreen(modifier = modifier, onNavigate = { route -> backStack.add(route)})
             }
             entry<Routes.ScreenSchedule> { route ->
-                ScheduleScreen(careerCode = route.careerCode)
+                ScheduleScreen(
+                    careerCode = route.careerCode,
+                    onBackClick = { backStack.removeLastOrNull() },
+                    onNavigate = { route -> backStack.add(route)}
+                )
+            }
+            entry<Routes.AboutMe> {
+                AboutMeScreen(
+                    onBackClick = { backStack.removeLastOrNull() }
+                )
             }
         }
     )

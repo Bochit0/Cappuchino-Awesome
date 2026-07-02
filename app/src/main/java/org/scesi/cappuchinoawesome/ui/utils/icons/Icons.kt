@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
-object Icons {
+object Icon {
     fun listNested(color: Color = Color.White): ImageVector = ImageVector.Builder(
         name = "ListNested",
         defaultWidth = 16.dp,
@@ -248,7 +248,6 @@ object Icons {
             lineTo(1384.6f, 224f)
             lineTo(1440f, 224f)
 
-            // Cierre y retorno por el techo superior (Y = 0f)
             lineTo(1440f, 0f)
             lineTo(1384.6f, 0f)
             lineTo(1384.6f, 0f)
@@ -413,4 +412,79 @@ object Icons {
             close()
         }
     }.build()
+
+    fun tikTok(color: Color = Color.White): ImageVector = ImageVector.Builder(
+        name = "TikTokIcon",
+        defaultWidth = 16.dp,
+        defaultHeight = 16.dp,
+        viewportWidth = 16f,
+        viewportHeight = 16f
+    ).apply {
+        path(fill = SolidColor(color)) {
+            moveTo(9f, 0f)
+
+            lineTo(10.98f, 0f)
+
+            curveTo(11.124f, 0.715f, 11.52f, 1.617f, 12.215f, 2.512f)
+            curveTo(12.895f, 3.389f, 13.797f, 4f, 15f, 4f)
+
+            lineTo(15f, 6f)
+            curveTo(13.247f, 6f, 11.93f, 5.186f, 11f, 4.171f)
+
+            lineTo(11f, 11f)
+
+            curveTo(11f, 13.761f, 8.761f, 16f, 6f, 16f)
+            curveTo(3.239f, 16f, 1f, 13.761f, 1f, 11f)
+            curveTo(1f, 8.239f, 3.239f, 6f, 6f, 6f)
+
+            lineTo(6f, 8f)
+
+            curveTo(4.343f, 8f, 3f, 9.343f, 3f, 11f)
+            curveTo(3f, 12.657f, 4.343f, 14f, 6f, 14f)
+            curveTo(7.657f, 14f, 9f, 12.657f, 9f, 11f)
+
+            lineTo(9f, 11f)
+
+            close()
+        }
+    }.build()
+
+    fun gitHub(color: Color = Color.White): ImageVector = ImageVector.Builder(
+        name = "GitHubIcon",
+        defaultWidth = 16.dp,
+        defaultHeight = 16.dp,
+        viewportWidth = 16f,
+        viewportHeight = 16f
+    ).apply {
+        path(fill = SolidColor(color)) {
+            moveTo(8f, 0f)
+            curveTo(3.58f, 0f, 0f, 3.58f, 0f, 8f)
+            curveTo(0f, 11.54f, 2.29f, 14.53f, 5.47f, 15.59f)
+            curveTo(5.87f, 15.66f, 6.02f, 15.42f, 6.02f, 15.21f)
+            curveTo(6.02f, 15.02f, 6.01f, 14.39f, 6.01f, 13.72f)
+            curveTo(3.99f, 14.09f, 3.47f, 13.23f, 3.31f, 12.78f)
+            curveTo(3.22f, 12.55f, 2.83f, 11.84f, 2.49f, 11.65f)
+            curveTo(2.21f, 11.5f, 1.81f, 11.13f, 2.48f, 11.12f)
+            curveTo(3.11f, 11.11f, 3.56f, 11.7f, 3.71f, 11.94f)
+            curveTo(4.43f, 13.15f, 5.58f, 12.81f, 6.04f, 12.6f)
+            curveTo(6.11f, 12.08f, 6.32f, 11.73f, 6.55f, 11.53f)
+            curveTo(4.77f, 11.33f, 2.91f, 10.64f, 2.91f, 7.58f)
+            curveTo(2.91f, 6.71f, 3.22f, 5.99f, 3.73f, 5.43f)
+            curveTo(3.65f, 5.23f, 3.37f, 4.41f, 3.81f, 3.31f)
+            curveTo(3.81f, 3.31f, 4.48f, 3.1f, 6.01f, 4.13f)
+            curveTo(6.65f, 3.95f, 7.33f, 3.86f, 8.01f, 3.86f)
+            curveTo(8.69f, 3.86f, 9.37f, 3.95f, 10.01f, 4.13f)
+            curveTo(11.54f, 3.09f, 12.21f, 3.31f, 12.21f, 3.31f)
+            curveTo(12.65f, 4.41f, 12.37f, 5.23f, 12.29f, 5.43f)
+            curveTo(12.8f, 5.99f, 13.11f, 6.7f, 13.11f, 7.58f)
+            curveTo(13.11f, 10.65f, 11.24f, 11.33f, 9.46f, 11.53f)
+            curveTo(9.75f, 11.78f, 10f, 12.26f, 10f, 13.01f)
+            curveTo(10f, 14.08f, 9.99f, 14.94f, 9.99f, 15.21f)
+            curveTo(9.99f, 15.42f, 10.14f, 15.67f, 10.54f, 15.59f)
+            arcTo(8.01f, 8.01f, 0f, true, false, 16f, 8f)
+            curveTo(16f, 3.58f, 12.42f, 0f, 8f, 0f)
+            close()
+        }
+    }.build()
+
 }
