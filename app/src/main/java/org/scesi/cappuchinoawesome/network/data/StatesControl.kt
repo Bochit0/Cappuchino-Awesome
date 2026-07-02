@@ -1,4 +1,4 @@
-package org.scesi.cappuchinoawesome.ui.network.data
+package org.scesi.cappuchinoawesome.network.data
 
 sealed class StatesControl<out T> {
     data object Loading : StatesControl<Nothing>()
