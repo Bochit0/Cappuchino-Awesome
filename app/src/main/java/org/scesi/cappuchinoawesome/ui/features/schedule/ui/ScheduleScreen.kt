@@ -25,11 +25,11 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.scesi.cappuchinoawesome.ui.navigation.Routes
-import org.scesi.cappuchinoawesome.ui.network.data.DetailCareer
-import org.scesi.cappuchinoawesome.ui.network.data.Group
-import org.scesi.cappuchinoawesome.ui.network.data.Level
-import org.scesi.cappuchinoawesome.ui.network.data.StatesControl
-import org.scesi.cappuchinoawesome.ui.network.data.Subject
+import org.scesi.cappuchinoawesome.network.data.DetailCareer
+import org.scesi.cappuchinoawesome.network.data.Group
+import org.scesi.cappuchinoawesome.network.data.Level
+import org.scesi.cappuchinoawesome.network.data.StatesControl
+import org.scesi.cappuchinoawesome.network.data.Subject
 import org.scesi.cappuchinoawesome.ui.theme.text
 import org.scesi.cappuchinoawesome.ui.utils.button.ButtonComponent
 import org.scesi.cappuchinoawesome.ui.utils.dropdown.DropDownComponent

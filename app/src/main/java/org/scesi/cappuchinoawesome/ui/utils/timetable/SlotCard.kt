@@ -19,14 +19,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import org.scesi.cappuchinoawesome.ui.network.data.GroupSubject
+import org.scesi.cappuchinoawesome.network.data.GroupSubject
 import org.scesi.cappuchinoawesome.ui.theme.text
 import org.scesi.cappuchinoawesome.ui.utils.modal.Modal
 import kotlin.collections.forEach
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import org.scesi.cappuchinoawesome.ui.network.data.Day
-import org.scesi.cappuchinoawesome.ui.network.data.Slot
+import org.scesi.cappuchinoawesome.network.data.Day
+import org.scesi.cappuchinoawesome.network.data.Slot
 
 
 @Composable

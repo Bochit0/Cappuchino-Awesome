@@ -1,4 +1,4 @@
-package org.scesi.cappuchinoawesome.ui.network
+package org.scesi.cappuchinoawesome.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
