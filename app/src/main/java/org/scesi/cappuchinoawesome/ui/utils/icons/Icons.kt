@@ -7,6 +7,103 @@ import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
 object Icon {
+    fun gear(color: Color): ImageVector = ImageVector.Builder(
+        name = "GearWideConnected",
+        defaultWidth = 16.dp,
+        defaultHeight = 16.dp,
+        viewportWidth = 16f,
+        viewportHeight = 16f
+    ).apply {
+        path(fill = SolidColor(color)) {
+            moveTo(7.068f, 0.727f)
+            curveTo(7.311f, -0.243f, 8.688f, -0.243f, 8.932f, 0.727f)
+            lineTo(9.003f, 1.013f)
+            curveTo(9.191f, 1.772f, 10.155f, 2.052f, 10.625f, 1.447f)
+            lineTo(10.83f, 1.236f)
+            curveTo(11.525f, 0.517f, 12.718f, 1.206f, 12.443f, 2.167f)
+            lineTo(12.363f, 2.451f)
+            curveTo(12.232f, 3.226f, 13.0f, 3.844f, 13.55f, 3.638f)
+            lineTo(13.833f, 3.557f)
+            curveTo(14.793f, 3.282f, 15.483f, 4.475f, 14.764f, 5.17f)
+            lineTo(14.553f, 5.375f)
+            curveTo(13.948f, 5.845f, 14.228f, 6.809f, 14.987f, 6.997f)
+            lineTo(15.273f, 7.068f)
+            curveTo(16.243f, 7.311f, 16.243f, 8.688f, 15.273f, 8.932f)
+            lineTo(14.987f, 9.003f)
+            curveTo(14.228f, 9.191f, 13.948f, 10.155f, 14.553f, 10.625f)
+            lineTo(14.764f, 10.83f)
+            curveTo(15.483f, 11.525f, 14.793f, 12.718f, 13.833f, 12.443f)
+            lineTo(13.55f, 12.363f)
+            curveTo(13.0f, 12.156f, 12.232f, 12.774f, 12.363f, 13.55f)
+            lineTo(12.444f, 13.833f)
+            curveTo(12.719f, 14.793f, 11.526f, 15.483f, 10.831f, 14.764f)
+            lineTo(10.626f, 14.553f)
+            curveTo(10.156f, 13.948f, 9.192f, 14.228f, 9.004f, 14.987f)
+            lineTo(8.933f, 15.273f)
+            curveTo(8.69f, 16.243f, 7.313f, 16.243f, 7.069f, 15.273f)
+            lineTo(6.998f, 14.987f)
+            curveTo(6.81f, 14.228f, 5.846f, 13.948f, 5.376f, 14.553f)
+            lineTo(5.171f, 14.764f)
+            curveTo(4.476f, 15.483f, 3.283f, 14.793f, 3.558f, 13.833f)
+            lineTo(3.639f, 13.55f)
+            curveTo(3.77f, 12.774f, 3.002f, 12.156f, 2.452f, 12.363f)
+            lineTo(2.168f, 12.444f)
+            curveTo(1.208f, 12.719f, 0.518f, 11.526f, 1.237f, 10.831f)
+            lineTo(1.448f, 10.626f)
+            curveTo(2.053f, 10.156f, 1.773f, 9.192f, 1.014f, 9.004f)
+            lineTo(0.728f, 8.933f)
+            curveTo(-0.242f, 8.69f, -0.242f, 7.313f, 0.728f, 7.069f)
+            lineTo(1.014f, 6.998f)
+            curveTo(1.773f, 6.81f, 2.053f, 5.846f, 1.448f, 5.376f)
+            lineTo(1.237f, 5.171f)
+            curveTo(0.518f, 4.476f, 1.208f, 3.283f, 2.168f, 3.558f)
+            lineTo(2.452f, 3.639f)
+            curveTo(3.002f, 3.844f, 3.77f, 3.226f, 3.639f, 2.452f)
+            lineTo(3.558f, 2.168f)
+            curveTo(3.283f, 1.208f, 4.476f, 0.518f, 5.171f, 1.237f)
+            lineTo(5.376f, 1.448f)
+            curveTo(5.846f, 2.053f, 6.81f, 1.773f, 6.998f, 1.014f)
+            close()
+        }
+
+        path(fill = SolidColor(color)) {
+            moveTo(12.973f, 8.5f)
+            lineTo(8.25f, 8.5f)
+            lineTo(5.416f, 12.279f)
+            verticalLineTo(12.279f)
+            curveTo(7.487f, 13.882f, 10.428f, 13.48f, 12.023f, 11.396f)
+            curveTo(12.637f, 10.595f, 12.971f, 9.615f, 12.973f, 8.5f)
+            close()
+        }
+
+        path(fill = SolidColor(color)) {
+            moveTo(12.973f, 7.5f)
+            curveTo(12.972f, 5.015f, 10.957f, 3.0f, 8.471f, 3.0f)
+            curveTo(6.985f, 3.0f, 5.623f, 3.725f, 4.8f, 4.941f)
+            lineTo(7.634f, 8.721f)
+            close()
+        }
+
+        path(fill = SolidColor(color)) {
+            moveTo(5.048f, 3.967f)
+            lineTo(4.961f, 4.032f)
+            close()
+        }
+
+        path(fill = SolidColor(color)) {
+            moveTo(4.617f, 4.322f)
+            curveTo(3.593f, 5.334f, 3.011f, 6.721f, 3.002f, 8.169f)
+            curveTo(2.993f, 9.617f, 3.559f, 11.01f, 4.574f, 12.024f)
+            lineTo(7.375f, 8.0f)
+            close()
+        }
+
+        path(fill = SolidColor(color)) {
+            moveTo(4.918f, 11.968f)
+            lineTo(5.005f, 12.033f)
+            close()
+        }
+    }.build()
     fun listNested(color: Color = Color.White): ImageVector = ImageVector.Builder(
         name = "ListNested",
         defaultWidth = 16.dp,

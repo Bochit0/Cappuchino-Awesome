@@ -8,9 +8,14 @@ import androidx.navigation3.ui.NavDisplay
 import org.scesi.cappuchinoawesome.ui.features.aboutme.AboutMeScreen
 import org.scesi.cappuchinoawesome.ui.features.home.ui.HomeScreen
 import org.scesi.cappuchinoawesome.ui.features.schedule.ui.ScheduleScreen
+import org.scesi.cappuchinoawesome.ui.features.settings.SettingsScreen
+import org.scesi.cappuchinoawesome.ui.features.settings.SettingsViewModel
 
 @Composable
-fun NavApp(modifier: Modifier = Modifier){
+fun NavApp(
+    modifier: Modifier = Modifier,
+    settingsViewModel: SettingsViewModel
+){
     val backStack = rememberNavBackStack(Routes.ScreenHome)
 
     NavDisplay(
@@ -30,6 +35,12 @@ fun NavApp(modifier: Modifier = Modifier){
             entry<Routes.AboutMe> {
                 AboutMeScreen(
                     onBackClick = { backStack.removeLastOrNull() }
+                )
+            }
+            entry<Routes.Settings> {
+                SettingsScreen (
+                    onBackClick = {backStack.removeLastOrNull()},
+                    settingsViewModel = settingsViewModel
                 )
             }
         }

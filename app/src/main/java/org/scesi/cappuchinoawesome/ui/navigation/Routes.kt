@@ -9,4 +9,6 @@ sealed class Routes: NavKey {
     @Serializable data class ScreenSchedule(val careerCode: Int): Routes()
 
     @Serializable data object AboutMe: Routes()
+
+    @Serializable data object Settings: Routes()
 }

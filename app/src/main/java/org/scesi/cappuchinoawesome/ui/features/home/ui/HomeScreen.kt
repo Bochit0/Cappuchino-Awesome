@@ -30,10 +30,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import org.scesi.cappuchinoawesome.ui.navigation.Routes
 import org.scesi.cappuchinoawesome.network.data.Career
 import org.scesi.cappuchinoawesome.network.data.StatesControl
+import org.scesi.cappuchinoawesome.ui.theme.subtitle
 import org.scesi.cappuchinoawesome.ui.theme.subtitleApp
 import org.scesi.cappuchinoawesome.ui.theme.title
 import org.scesi.cappuchinoawesome.ui.theme.titleApp
 import org.scesi.cappuchinoawesome.ui.utils.button.ButtonComponent
+import org.scesi.cappuchinoawesome.ui.utils.icons.Icon
 import org.scesi.cappuchinoawesome.ui.utils.icons.Icon.customWaveBottom
 
 @Composable
@@ -52,6 +54,15 @@ fun HomeScreen(
             modifier = modifier.align(Alignment.Center),
             viewModel = viewModel,
             onNavigate = onNavigate
+        )
+
+        ButtonComponent(
+            onClick = { onNavigate(Routes.Settings) },
+            isIcon = Icon.gear(MaterialTheme.colorScheme.outline),
+            backgroundColor = MaterialTheme.colorScheme.primary,
+            textColor = MaterialTheme.colorScheme.tertiary,
+            modifier = Modifier
+                .align(Alignment.TopEnd)
         )
     }
 }
@@ -89,12 +100,12 @@ fun Home(
                         .offset(y = 10.dp),
                     contentScale = ContentScale.FillBounds
                 )
-                CarrerSelectButton(
+                CareerSelectButton(
                     onClick = { viewModel.toggleCareers() }
                 )
                 Spacer(Modifier.height(5.dp))
                 if (dropList) {
-                    DropDownCarrers(
+                    DropDownCareers(
                         modifier = modifier,
                         onNavigate = onNavigate,
                         stateCareer = stateCareers
@@ -120,7 +131,7 @@ fun TitleApp(){
 }
 
 @Composable
-fun CarrerSelectButton(
+fun CareerSelectButton(
     onClick: () -> Unit
 ){
     ButtonComponent(
@@ -134,7 +145,7 @@ fun CarrerSelectButton(
 }
 
 @Composable
-fun DropDownCarrers(
+fun DropDownCareers(
     modifier: Modifier = Modifier,
     onNavigate: (Routes) -> Unit,
     stateCareer: StatesControl<List<Career>>
@@ -226,7 +237,7 @@ fun CareerCard(
         ) {
             Text(
                 text = careerName,
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.subtitle
             )
         }
     }
