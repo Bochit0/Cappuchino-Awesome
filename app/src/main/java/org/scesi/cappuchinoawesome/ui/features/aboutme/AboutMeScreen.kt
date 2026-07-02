@@ -1,6 +1,8 @@
 package org.scesi.cappuchinoawesome.ui.features.aboutme
 
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.scesi.cappuchinoawesome.ui.theme.text
@@ -31,6 +34,7 @@ import org.scesi.cappuchinoawesome.ui.utils.header.HeaderComponent
 import org.scesi.cappuchinoawesome.ui.utils.icons.Icon
 import org.scesi.cappuchinoawesome.ui.utils.icons.Icon.customWaveBottom
 import org.scesi.cappuchinoawesome.ui.utils.infocard.InfoCard
+import androidx.core.net.toUri
 
 @Composable
 fun AboutMeScreen(
@@ -53,6 +57,7 @@ fun AboutMe(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit
 ){
+    val context = LocalContext.current
     Column(modifier = modifier
         .fillMaxSize()
     ) {
@@ -137,7 +142,12 @@ fun AboutMe(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         ButtonComponent(
-                            onClick = {  },
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW,
+                                    "https://www.tiktok.com/@don_bocho?_r=1&_t=ZS-97gfEbDEJ8C".toUri()
+                                )
+                                context.startActivity(intent)
+                            },
                             isIcon = Icon.tikTok(color = MaterialTheme.colorScheme.onSecondary),
                             backgroundColor = MaterialTheme.colorScheme.secondary,
                             textColor = MaterialTheme.colorScheme.outline,
@@ -145,7 +155,12 @@ fun AboutMe(
                         )
 
                         ButtonComponent(
-                            onClick = {  },
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW,
+                                    "https://github.com/Bochit0".toUri()
+                                )
+                                context.startActivity(intent)
+                            },
                             isIcon = Icon.gitHub(color = MaterialTheme.colorScheme.onSecondary),
                             backgroundColor = MaterialTheme.colorScheme.secondary,
                             textColor = MaterialTheme.colorScheme.outline,
