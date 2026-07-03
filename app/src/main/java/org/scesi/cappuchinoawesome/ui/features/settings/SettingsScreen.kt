@@ -50,12 +50,12 @@ fun Settings(
         HeaderComponent(
             titleHeader = "Configuraciones",
             backgroundColor = MaterialTheme.colorScheme.primary,
-            titleColor = MaterialTheme.colorScheme.tertiary,
+            titleColor = MaterialTheme.colorScheme.onPrimary,
             leftAction = { ButtonComponent(
                 onClick = {onBackClick()},
                 isIcon = Icon.boxArrowLeft(MaterialTheme.colorScheme.outline),
                 backgroundColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.tertiary
+                textColor = MaterialTheme.colorScheme.onPrimary
             )}
         )
         Spacer(Modifier.height(120.dp))
@@ -64,7 +64,7 @@ fun Settings(
             onClick = {settingsViewModel.changeTheme()},
             isText = "Cambiar color theme",
             backgroundColor = MaterialTheme.colorScheme.primary,
-            textColor = MaterialTheme.colorScheme.tertiary
+            textColor = MaterialTheme.colorScheme.onPrimary
         )
         Spacer(Modifier.height(60.dp))
         ButtonComponent(
@@ -72,7 +72,7 @@ fun Settings(
             onClick = { settingsViewModel.changeTypo() },
             isText = "Cambiar tipografia",
             backgroundColor = MaterialTheme.colorScheme.primary,
-            textColor = MaterialTheme.colorScheme.tertiary
+            textColor = MaterialTheme.colorScheme.onPrimary
         )
     }
 }

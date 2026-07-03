@@ -47,12 +47,12 @@ fun InfoCard(
                 Text(
                     text = title,
                     style = MaterialTheme.typography.text.copy(lineHeight = 26.sp),
-                    color = MaterialTheme.colorScheme.tertiary
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
                 HorizontalDivider(
                     modifier = Modifier.padding(vertical = 8.dp),
                     thickness = 3.dp,
-                    color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.2f)
+                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.2f)
                 )
                 content()
             }

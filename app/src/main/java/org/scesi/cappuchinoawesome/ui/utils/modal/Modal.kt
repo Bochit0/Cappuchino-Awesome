@@ -37,7 +37,7 @@ fun Modal(
                 .wrapContentHeight(),
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f),
-                contentColor = MaterialTheme.colorScheme.tertiary
+                contentColor = MaterialTheme.colorScheme.onPrimary
             ),
             shape = RoundedCornerShape(10.dp)
         ) {

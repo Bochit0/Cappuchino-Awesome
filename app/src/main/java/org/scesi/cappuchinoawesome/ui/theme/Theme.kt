@@ -26,8 +26,8 @@ private val LightColorScheme = lightColorScheme(
     primary = DeepPurple,
     onPrimary = White,
     secondary = StormyGreen,
-    onSecondary = StormyGreen,
-    tertiary = White,
+    onSecondary = White,
+    tertiary = StormyGreen,
     background = White,
     outline = DeepPurple
 

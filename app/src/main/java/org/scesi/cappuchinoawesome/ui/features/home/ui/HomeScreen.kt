@@ -60,7 +60,7 @@ fun HomeScreen(
             onClick = { onNavigate(Routes.Settings) },
             isIcon = Icon.gear(MaterialTheme.colorScheme.outline),
             backgroundColor = MaterialTheme.colorScheme.primary,
-            textColor = MaterialTheme.colorScheme.tertiary,
+            textColor = MaterialTheme.colorScheme.onPrimary,
             modifier = Modifier
                 .align(Alignment.TopEnd)
         )
@@ -139,7 +139,7 @@ fun CareerSelectButton(
         modifier = Modifier.fillMaxWidth(),
         isText =  "Ver Carreras" ,
         backgroundColor = MaterialTheme.colorScheme.primary,
-        textColor = MaterialTheme.colorScheme.tertiary
+        textColor = MaterialTheme.colorScheme.onPrimary
     )
 
 }
@@ -225,7 +225,7 @@ fun CareerCard(
         shape = RoundedCornerShape(6.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.tertiary
+            contentColor = MaterialTheme.colorScheme.onPrimary
         )
     ) {
         Box(

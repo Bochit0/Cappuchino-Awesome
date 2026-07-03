@@ -90,7 +90,7 @@ fun Schedule(
         HeaderComponent(
             titleHeader = titleHeader,
             backgroundColor = MaterialTheme.colorScheme.primary,
-            titleColor = MaterialTheme.colorScheme.tertiary,
+            titleColor = MaterialTheme.colorScheme.onPrimary,
             leftAction = { ButtonComponent(
                 onClick = { viewModel.toggleMenu() },
                 isIcon = if (openMenu) {
@@ -152,7 +152,7 @@ fun InteractiveMenu(
             .fillMaxHeight()
             .fillMaxWidth(0.55f)
             .background(
-                MaterialTheme.colorScheme.onSecondary,
+                MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(4.dp))
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -214,7 +214,7 @@ fun SubjectItem(
             name = subjectName,
             textStyle = MaterialTheme.typography.text,
             onClick = { viewModel.onClickSubject(subjectCode) },
-            contentColor = MaterialTheme.colorScheme.tertiary
+            contentColor = MaterialTheme.colorScheme.onPrimary
         )
         if (isExpanded) {
             DropDownComponent(
@@ -249,8 +249,8 @@ fun GroupItem(
         else
             MaterialTheme.colorScheme.primary,
         contentColor = if (isSelected)
-            MaterialTheme.colorScheme.tertiary
+            MaterialTheme.colorScheme.onPrimary
         else
-            MaterialTheme.colorScheme.tertiary
+            MaterialTheme.colorScheme.onPrimary
     )
 }

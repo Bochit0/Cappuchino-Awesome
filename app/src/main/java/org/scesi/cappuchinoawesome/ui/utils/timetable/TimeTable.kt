@@ -173,7 +173,7 @@ fun DayColumn(
             Text(
                 text = day.name,
                 style = MaterialTheme.typography.subtitle,
-                color = MaterialTheme.colorScheme.tertiary
+                color = MaterialTheme.colorScheme.onPrimary
             )
         }
 
