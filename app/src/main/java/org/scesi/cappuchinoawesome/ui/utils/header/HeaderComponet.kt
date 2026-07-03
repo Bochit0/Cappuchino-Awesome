@@ -31,8 +31,6 @@ fun HeaderComponent(
     titleColor: Color,
     isWave: Boolean = true,
     leftAction: @Composable (() -> Unit)? = null,
-    rightAction: @Composable (() -> Unit)? = null,
-    otherAction: @Composable (() -> Unit)? = null
 ){
     Column(modifier = modifier.fillMaxWidth()) {
         Box(
@@ -48,6 +46,8 @@ fun HeaderComponent(
                 if (leftAction != null) {
                     leftAction()
                     Spacer(modifier = Modifier.width(16.dp))
+                }else{
+                    Spacer(modifier = Modifier.width(56.dp))
                 }
 
                 Text(
@@ -58,24 +58,6 @@ fun HeaderComponent(
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f)
                 )
-
-                if (rightAction != null || otherAction != null) {
-                    Spacer(modifier = Modifier.width(16.dp))
-
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        if (rightAction != null) {
-                            rightAction()
-                        }
-
-                        if (rightAction != null && otherAction != null) {
-                            Spacer(modifier = Modifier.width(8.dp))
-                        }
-
-                        if (otherAction != null) {
-                            otherAction()
-                        }
-                    }
-                }
             }
         }
         if (isWave) {

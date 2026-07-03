@@ -25,9 +25,9 @@ import org.scesi.cappuchinoawesome.ui.utils.icons.Icon
 @Composable
 fun SettingsScreen(
     settingsViewModel: SettingsViewModel,
-    onBackClick: () -> Unit){
+){
     Box(modifier = Modifier.fillMaxSize()){
-        Settings(modifier = Modifier, settingsViewModel, onBackClick)
+        Settings(modifier = Modifier, settingsViewModel)
     }
 }
 
@@ -35,7 +35,6 @@ fun SettingsScreen(
 fun Settings(
     modifier: Modifier = Modifier,
     settingsViewModel: SettingsViewModel,
-    onBackClick: () -> Unit
 ){
     Column(
         modifier = modifier,
@@ -51,12 +50,6 @@ fun Settings(
             titleHeader = "Configuraciones",
             backgroundColor = MaterialTheme.colorScheme.primary,
             titleColor = MaterialTheme.colorScheme.onPrimary,
-            leftAction = { ButtonComponent(
-                onClick = {onBackClick()},
-                isIcon = Icon.boxArrowLeft(MaterialTheme.colorScheme.outline),
-                backgroundColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.onPrimary
-            )}
         )
         Spacer(Modifier.height(120.dp))
         ButtonComponent(

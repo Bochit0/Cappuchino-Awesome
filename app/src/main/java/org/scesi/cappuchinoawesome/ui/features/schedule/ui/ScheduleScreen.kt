@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import org.scesi.cappuchinoawesome.ui.navigation.Routes
 import org.scesi.cappuchinoawesome.network.data.DetailCareer
 import org.scesi.cappuchinoawesome.network.data.Group
 import org.scesi.cappuchinoawesome.network.data.Level
@@ -42,8 +41,6 @@ import org.scesi.cappuchinoawesome.ui.utils.timetable.TimeTable
 fun ScheduleScreen(
     viewModel: ScheduleViewModel = viewModel(),
     careerCode: Int,
-    onNavigate: (Routes) -> Unit,
-    onBackClick: () -> Unit
 ){
     LaunchedEffect(careerCode) {
         viewModel.loadDetail(careerCode)
@@ -55,8 +52,6 @@ fun ScheduleScreen(
         Schedule(
             viewModel,
             detailState = detailState,
-            onNavigate = onNavigate,
-            onBackClick = onBackClick
         )
     }
 }
@@ -66,8 +61,6 @@ fun Schedule(
     viewModel: ScheduleViewModel,
     modifier: Modifier = Modifier,
     detailState: StatesControl<DetailCareer>,
-    onNavigate: (Routes) -> Unit,
-    onBackClick: () -> Unit
 ){
     val openMenu by viewModel.openSemesters.collectAsStateWithLifecycle()
     val selectedGroups by viewModel.selectedGroups.collectAsStateWithLifecycle()
@@ -98,21 +91,6 @@ fun Schedule(
                 } else {
                     Icon.list(color = MaterialTheme.colorScheme.tertiary)
                 },
-                backgroundColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.tertiary
-            )},
-            rightAction = { ButtonComponent(
-                onClick = {onNavigate(Routes.AboutMe)},
-                isIcon = Icon.stars(),
-                backgroundColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.tertiary
-            )},
-            otherAction = { ButtonComponent(
-                onClick = {
-                    viewModel.rebootTable()
-                    onBackClick()
-                },
-                isIcon = Icon.boxArrowLeft(),
                 backgroundColor = MaterialTheme.colorScheme.primary,
                 textColor = MaterialTheme.colorScheme.tertiary
             )}

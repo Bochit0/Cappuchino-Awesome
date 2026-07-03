@@ -55,15 +55,6 @@ fun HomeScreen(
             viewModel = viewModel,
             onNavigate = onNavigate
         )
-
-        ButtonComponent(
-            onClick = { onNavigate(Routes.Settings) },
-            isIcon = Icon.gear(MaterialTheme.colorScheme.outline),
-            backgroundColor = MaterialTheme.colorScheme.primary,
-            textColor = MaterialTheme.colorScheme.onPrimary,
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-        )
     }
 }
 
