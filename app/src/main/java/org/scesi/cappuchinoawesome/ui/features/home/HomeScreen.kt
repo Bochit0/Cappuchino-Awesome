@@ -50,7 +50,7 @@ fun HomeScreen(
             .padding(16.dp))
     {
         Home(
-            modifier = modifier.align(Alignment.Center),
+            modifier = Modifier.align(Alignment.Center),
             viewModel = viewModel,
             onNavigate = onNavigate
         )
@@ -70,7 +70,6 @@ fun Home(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         TitleApp()
         Spacer(Modifier.height(30.dp))
         Box(
@@ -96,7 +95,7 @@ fun Home(
                 Spacer(Modifier.height(5.dp))
                 if (dropList) {
                     DropDownCareers(
-                        modifier = modifier,
+                        modifier = Modifier,
                         onNavigate = onNavigate,
                         stateCareer = stateCareers
                     )
@@ -206,7 +205,8 @@ fun CareerList(
 fun CareerCard(
     careerName: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier){
+    modifier: Modifier = Modifier
+){
     Card(
         modifier = modifier
             .padding(bottom = 4.dp)
