@@ -38,16 +38,15 @@ import androidx.core.net.toUri
 
 @Composable
 fun AboutMeScreen(
-    onBackClick: () -> Unit
+    modifier: Modifier
 ){
     Box(
-        Modifier
+        modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background))
     {
         AboutMe(
             modifier = Modifier.align(Alignment.Center),
-            onBackClick
         )
     }
 }
@@ -55,7 +54,6 @@ fun AboutMeScreen(
 @Composable
 fun AboutMe(
     modifier: Modifier = Modifier,
-    onBackClick: () -> Unit
 ){
     val context = LocalContext.current
     Column(modifier = modifier
@@ -72,15 +70,6 @@ fun AboutMe(
             titleHeader = "By Bochito",
             titleColor = MaterialTheme.colorScheme.onPrimary,
             backgroundColor = MaterialTheme.colorScheme.primary,
-            leftAction = {
-                ButtonComponent(
-                    onClick = {onBackClick()},
-                    isIcon = Icon.boxArrowLeft(MaterialTheme.colorScheme.onPrimary),
-                    backgroundColor = MaterialTheme.colorScheme.primary,
-                    textColor = MaterialTheme.colorScheme.tertiary
-                )
-            }
-
         )
 
         Spacer(Modifier.height(10.dp))

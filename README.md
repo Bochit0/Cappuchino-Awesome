@@ -7,18 +7,24 @@ App mobile que permite gestionar y consultar los horarios de clases de todas las
 
 ---
 
+## Navegación
+
+La app usa una barra de navegación inferior (BottomNavigationBar) con tres accesos fijos:
+
+TabAcciónCarrerasNavega a Home. Si ya estás en Home, abre/cierra el dropdown de carrerasSobre míNavega a About MeAjustesNavega a Settings
+
+La pantalla de Schedule no forma parte del bottomNav — se accede exclusivamente haciendo click en una carrera desde Home, y se abandona volviendo a la tab "Carreras" o con el gesto de retroceso del sistema.
+
 ## Pantallas
 
 ### 1. Home
-Se observa el título de la aplicación con un botón para mostrar las carreras, obtenidas desde un JSON remoto. Cada carrera se presenta en un `Card` con función de click para navegar a su horario. En la parte superior izquierda se encuentra el botón de acceso a Ajustes.
+Se observa el título de la aplicación con un botón para mostrar las carreras, obtenidas desde un JSON remoto. Cada carrera se presenta en un `Card` con función de click para navegar a su horario.
 
 ### 2. Schedule
 Tablero de horarios con las horas en una columna izquierda y los días en una fila superior.
 
 **Header:**
 - Nombre de la carrera seleccionada previamente
-- Botón de navegación hacia atrás
-- Botón de navegacipon a About me
 - Menú de selección por niveles
 
 **Sistema de filtrado por niveles:**

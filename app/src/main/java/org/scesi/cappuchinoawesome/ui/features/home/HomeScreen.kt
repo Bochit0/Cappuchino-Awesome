@@ -1,4 +1,4 @@
-package org.scesi.cappuchinoawesome.ui.features.home.ui
+package org.scesi.cappuchinoawesome.ui.features.home
 
 import androidx.compose.foundation.Image
 import org.scesi.cappuchinoawesome.ui.utils.dropdown.DropDownComponent
@@ -35,7 +35,6 @@ import org.scesi.cappuchinoawesome.ui.theme.subtitleApp
 import org.scesi.cappuchinoawesome.ui.theme.title
 import org.scesi.cappuchinoawesome.ui.theme.titleApp
 import org.scesi.cappuchinoawesome.ui.utils.button.ButtonComponent
-import org.scesi.cappuchinoawesome.ui.utils.icons.Icon
 import org.scesi.cappuchinoawesome.ui.utils.icons.Icon.customWaveBottom
 
 @Composable
@@ -51,18 +50,9 @@ fun HomeScreen(
             .padding(16.dp))
     {
         Home(
-            modifier = modifier.align(Alignment.Center),
+            modifier = Modifier.align(Alignment.Center),
             viewModel = viewModel,
             onNavigate = onNavigate
-        )
-
-        ButtonComponent(
-            onClick = { onNavigate(Routes.Settings) },
-            isIcon = Icon.gear(MaterialTheme.colorScheme.outline),
-            backgroundColor = MaterialTheme.colorScheme.primary,
-            textColor = MaterialTheme.colorScheme.tertiary,
-            modifier = Modifier
-                .align(Alignment.TopEnd)
         )
     }
 }
@@ -80,7 +70,6 @@ fun Home(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         TitleApp()
         Spacer(Modifier.height(30.dp))
         Box(
@@ -106,7 +95,7 @@ fun Home(
                 Spacer(Modifier.height(5.dp))
                 if (dropList) {
                     DropDownCareers(
-                        modifier = modifier,
+                        modifier = Modifier,
                         onNavigate = onNavigate,
                         stateCareer = stateCareers
                     )
@@ -139,7 +128,7 @@ fun CareerSelectButton(
         modifier = Modifier.fillMaxWidth(),
         isText =  "Ver Carreras" ,
         backgroundColor = MaterialTheme.colorScheme.primary,
-        textColor = MaterialTheme.colorScheme.tertiary
+        textColor = MaterialTheme.colorScheme.onPrimary
     )
 
 }
@@ -153,7 +142,7 @@ fun DropDownCareers(
     when(stateCareer){
         is StatesControl.Loading -> {
             Box(
-                modifier = Modifier.fillMaxWidth().padding(24.dp),
+                modifier = modifier.fillMaxWidth().padding(24.dp),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator(color = MaterialTheme.colorScheme.tertiary)
@@ -169,7 +158,7 @@ fun DropDownCareers(
 
         is StatesControl.Empty -> {
             Box(
-                modifier = Modifier.fillMaxWidth().padding(24.dp),
+                modifier = modifier.fillMaxWidth().padding(24.dp),
                 contentAlignment = Alignment.Center
             ){
                 Text(
@@ -182,7 +171,7 @@ fun DropDownCareers(
 
         is StatesControl.Error -> {
             Box(
-                modifier = Modifier.fillMaxWidth().padding(24.dp),
+                modifier = modifier.fillMaxWidth().padding(24.dp),
                 contentAlignment = Alignment.Center
             ){
                 Text(
@@ -206,7 +195,7 @@ fun CareerList(
         itemContent = { career ->
             CareerCard(
                 careerName = career.name,
-                onClick = { onNavigate(Routes.ScreenSchedule(career.code)) }
+                onClick = { onNavigate(Routes.ScreenSchedule(careerCode = career.code)) }
             )
         }
     )
@@ -216,7 +205,8 @@ fun CareerList(
 fun CareerCard(
     careerName: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier){
+    modifier: Modifier = Modifier
+){
     Card(
         modifier = modifier
             .padding(bottom = 4.dp)
@@ -225,7 +215,7 @@ fun CareerCard(
         shape = RoundedCornerShape(6.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.tertiary
+            contentColor = MaterialTheme.colorScheme.onPrimary
         )
     ) {
         Box(

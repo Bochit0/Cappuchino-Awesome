@@ -16,33 +16,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import org.scesi.cappuchinoawesome.ui.utils.button.ButtonComponent
 import org.scesi.cappuchinoawesome.ui.utils.header.HeaderComponent
-import org.scesi.cappuchinoawesome.ui.utils.icons.Icon
 
 
 @Composable
 fun SettingsScreen(
+    modifier: Modifier,
     settingsViewModel: SettingsViewModel,
-    onBackClick: () -> Unit){
-    Box(modifier = Modifier.fillMaxSize()){
-        Settings(modifier = Modifier, settingsViewModel, onBackClick)
-    }
+){
+    Settings(modifier = modifier, settingsViewModel)
 }
 
 @Composable
 fun Settings(
     modifier: Modifier = Modifier,
     settingsViewModel: SettingsViewModel,
-    onBackClick: () -> Unit
 ){
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.primary)
                 .windowInsetsTopHeight(WindowInsets.statusBars)
@@ -50,13 +46,7 @@ fun Settings(
         HeaderComponent(
             titleHeader = "Configuraciones",
             backgroundColor = MaterialTheme.colorScheme.primary,
-            titleColor = MaterialTheme.colorScheme.tertiary,
-            leftAction = { ButtonComponent(
-                onClick = {onBackClick()},
-                isIcon = Icon.boxArrowLeft(MaterialTheme.colorScheme.outline),
-                backgroundColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.tertiary
-            )}
+            titleColor = MaterialTheme.colorScheme.onPrimary,
         )
         Spacer(Modifier.height(120.dp))
         ButtonComponent(
@@ -64,7 +54,7 @@ fun Settings(
             onClick = {settingsViewModel.changeTheme()},
             isText = "Cambiar color theme",
             backgroundColor = MaterialTheme.colorScheme.primary,
-            textColor = MaterialTheme.colorScheme.tertiary
+            textColor = MaterialTheme.colorScheme.onPrimary
         )
         Spacer(Modifier.height(60.dp))
         ButtonComponent(
@@ -72,7 +62,7 @@ fun Settings(
             onClick = { settingsViewModel.changeTypo() },
             isText = "Cambiar tipografia",
             backgroundColor = MaterialTheme.colorScheme.primary,
-            textColor = MaterialTheme.colorScheme.tertiary
+            textColor = MaterialTheme.colorScheme.onPrimary
         )
     }
 }

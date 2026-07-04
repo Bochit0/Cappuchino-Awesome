@@ -1,4 +1,4 @@
-package org.scesi.cappuchinoawesome.ui.features.schedule.ui
+package org.scesi.cappuchinoawesome.ui.features.schedule
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import org.scesi.cappuchinoawesome.ui.navigation.Routes
 import org.scesi.cappuchinoawesome.network.data.DetailCareer
 import org.scesi.cappuchinoawesome.network.data.Group
 import org.scesi.cappuchinoawesome.network.data.Level
@@ -40,10 +39,9 @@ import org.scesi.cappuchinoawesome.ui.utils.timetable.TimeTable
 
 @Composable
 fun ScheduleScreen(
+    modifier: Modifier,
     viewModel: ScheduleViewModel = viewModel(),
     careerCode: Int,
-    onNavigate: (Routes) -> Unit,
-    onBackClick: () -> Unit
 ){
     LaunchedEffect(careerCode) {
         viewModel.loadDetail(careerCode)
@@ -51,12 +49,10 @@ fun ScheduleScreen(
 
     val detailState by viewModel.detailState.collectAsStateWithLifecycle()
 
-    Box(modifier = Modifier.fillMaxSize()){
+    Box(modifier = modifier.fillMaxSize()){
         Schedule(
             viewModel,
             detailState = detailState,
-            onNavigate = onNavigate,
-            onBackClick = onBackClick
         )
     }
 }
@@ -64,14 +60,11 @@ fun ScheduleScreen(
 @Composable
 fun Schedule(
     viewModel: ScheduleViewModel,
-    modifier: Modifier = Modifier,
     detailState: StatesControl<DetailCareer>,
-    onNavigate: (Routes) -> Unit,
-    onBackClick: () -> Unit
 ){
     val openMenu by viewModel.openSemesters.collectAsStateWithLifecycle()
     val selectedGroups by viewModel.selectedGroups.collectAsStateWithLifecycle()
-    Column(modifier = modifier
+    Column(modifier = Modifier
         .fillMaxSize()
     ) {
         val titleHeader = when (detailState) {
@@ -90,7 +83,7 @@ fun Schedule(
         HeaderComponent(
             titleHeader = titleHeader,
             backgroundColor = MaterialTheme.colorScheme.primary,
-            titleColor = MaterialTheme.colorScheme.tertiary,
+            titleColor = MaterialTheme.colorScheme.onPrimary,
             leftAction = { ButtonComponent(
                 onClick = { viewModel.toggleMenu() },
                 isIcon = if (openMenu) {
@@ -98,21 +91,6 @@ fun Schedule(
                 } else {
                     Icon.list(color = MaterialTheme.colorScheme.tertiary)
                 },
-                backgroundColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.tertiary
-            )},
-            rightAction = { ButtonComponent(
-                onClick = {onNavigate(Routes.AboutMe)},
-                isIcon = Icon.stars(),
-                backgroundColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.tertiary
-            )},
-            otherAction = { ButtonComponent(
-                onClick = {
-                    viewModel.rebootTable()
-                    onBackClick()
-                },
-                isIcon = Icon.boxArrowLeft(),
                 backgroundColor = MaterialTheme.colorScheme.primary,
                 textColor = MaterialTheme.colorScheme.tertiary
             )}
@@ -152,11 +130,11 @@ fun InteractiveMenu(
             .fillMaxHeight()
             .fillMaxWidth(0.55f)
             .background(
-                MaterialTheme.colorScheme.onSecondary,
+                MaterialTheme.colorScheme.primary,
                 shape = RoundedCornerShape(4.dp))
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            itemsIndexed(levels) { index, level ->
+            items(levels) { level ->
                 SemesterItem(
                     viewModel = viewModel,
                     semesterCode = "SEMESTRE ${level.code}",
@@ -214,7 +192,7 @@ fun SubjectItem(
             name = subjectName,
             textStyle = MaterialTheme.typography.text,
             onClick = { viewModel.onClickSubject(subjectCode) },
-            contentColor = MaterialTheme.colorScheme.tertiary
+            contentColor = MaterialTheme.colorScheme.onPrimary
         )
         if (isExpanded) {
             DropDownComponent(
@@ -249,8 +227,8 @@ fun GroupItem(
         else
             MaterialTheme.colorScheme.primary,
         contentColor = if (isSelected)
-            MaterialTheme.colorScheme.tertiary
+            MaterialTheme.colorScheme.onPrimary
         else
-            MaterialTheme.colorScheme.tertiary
+            MaterialTheme.colorScheme.onPrimary
     )
 }

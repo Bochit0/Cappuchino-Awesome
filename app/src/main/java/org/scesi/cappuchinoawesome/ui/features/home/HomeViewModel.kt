@@ -1,4 +1,4 @@
-package org.scesi.cappuchinoawesome.ui.features.home.ui
+package org.scesi.cappuchinoawesome.ui.features.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,10 +14,10 @@ import org.scesi.cappuchinoawesome.network.data.StatesControl
 class HomeViewModel(
     private val apiService: ApiService = RetrofitClient.retrofit
 ) : ViewModel() {
-    private val _careerState = MutableStateFlow<StatesControl <List <Career>>>(StatesControl.Loading)
+    private val _careerState = MutableStateFlow<StatesControl<List<Career>>>(StatesControl.Loading)
     private val _isOpen = MutableStateFlow(false)
     val isOpen: StateFlow<Boolean> = _isOpen.asStateFlow()
-    val careerState: StateFlow<StatesControl<List <Career>>> = _careerState.asStateFlow()
+    val careerState: StateFlow<StatesControl<List<Career>>> = _careerState.asStateFlow()
 
     init {
         loadCareers()
