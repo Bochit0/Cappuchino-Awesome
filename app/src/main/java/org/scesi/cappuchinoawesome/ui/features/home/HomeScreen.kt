@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import org.scesi.cappuchinoawesome.ui.utils.dropdown.DropDownComponent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -107,15 +108,22 @@ fun Home(
 
 @Composable
 fun TitleApp(){
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(
-            text = "Cappuchino",
-            color = MaterialTheme.colorScheme.outline,
-            style = MaterialTheme.typography.titleApp)
-        Text(
-            text = "Awesome",
-            color = MaterialTheme.colorScheme.primary,
-            style = MaterialTheme.typography.subtitleApp)
+    BoxWithConstraints(
+        contentAlignment = Alignment.Center
+    ) {
+        val width = maxWidth
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = "Cappuchino",
+                color = MaterialTheme.colorScheme.outline,
+                style = titleApp(width)
+            )
+            Text(
+                text = "Awesome",
+                color = MaterialTheme.colorScheme.primary,
+                style = subtitleApp(width)
+            )
+        }
     }
 }
 
