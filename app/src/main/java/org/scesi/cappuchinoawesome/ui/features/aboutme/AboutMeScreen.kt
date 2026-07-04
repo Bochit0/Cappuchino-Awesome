@@ -37,9 +37,11 @@ import org.scesi.cappuchinoawesome.ui.utils.infocard.InfoCard
 import androidx.core.net.toUri
 
 @Composable
-fun AboutMeScreen(){
+fun AboutMeScreen(
+    modifier: Modifier
+){
     Box(
-        Modifier
+        modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background))
     {

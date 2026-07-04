@@ -7,9 +7,9 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import org.scesi.cappuchinoawesome.ui.features.aboutme.AboutMeScreen
-import org.scesi.cappuchinoawesome.ui.features.home.ui.HomeScreen
-import org.scesi.cappuchinoawesome.ui.features.home.ui.HomeViewModel
-import org.scesi.cappuchinoawesome.ui.features.schedule.ui.ScheduleScreen
+import org.scesi.cappuchinoawesome.ui.features.home.HomeScreen
+import org.scesi.cappuchinoawesome.ui.features.home.HomeViewModel
+import org.scesi.cappuchinoawesome.ui.features.schedule.ScheduleScreen
 import org.scesi.cappuchinoawesome.ui.features.settings.SettingsScreen
 import org.scesi.cappuchinoawesome.ui.features.settings.SettingsViewModel
 
@@ -33,14 +33,18 @@ fun NavApp(
             }
             entry<Routes.ScreenSchedule> { route ->
                 ScheduleScreen(
+                    modifier = modifier,
                     careerCode = route.careerCode,
                 )
             }
             entry<Routes.AboutMe> {
-                AboutMeScreen()
+                AboutMeScreen( modifier = modifier)
             }
             entry<Routes.Settings> {
-                SettingsScreen (settingsViewModel = settingsViewModel)
+                SettingsScreen (
+                    modifier = modifier,
+                    settingsViewModel = settingsViewModel
+                )
             }
         }
     )

@@ -1,4 +1,4 @@
-package org.scesi.cappuchinoawesome.ui.features.home.ui
+package org.scesi.cappuchinoawesome.ui.features.home
 
 import androidx.compose.foundation.Image
 import org.scesi.cappuchinoawesome.ui.utils.dropdown.DropDownComponent
@@ -35,7 +35,6 @@ import org.scesi.cappuchinoawesome.ui.theme.subtitleApp
 import org.scesi.cappuchinoawesome.ui.theme.title
 import org.scesi.cappuchinoawesome.ui.theme.titleApp
 import org.scesi.cappuchinoawesome.ui.utils.button.ButtonComponent
-import org.scesi.cappuchinoawesome.ui.utils.icons.Icon
 import org.scesi.cappuchinoawesome.ui.utils.icons.Icon.customWaveBottom
 
 @Composable
@@ -144,7 +143,7 @@ fun DropDownCareers(
     when(stateCareer){
         is StatesControl.Loading -> {
             Box(
-                modifier = Modifier.fillMaxWidth().padding(24.dp),
+                modifier = modifier.fillMaxWidth().padding(24.dp),
                 contentAlignment = Alignment.Center
             ) {
                 CircularProgressIndicator(color = MaterialTheme.colorScheme.tertiary)
@@ -160,7 +159,7 @@ fun DropDownCareers(
 
         is StatesControl.Empty -> {
             Box(
-                modifier = Modifier.fillMaxWidth().padding(24.dp),
+                modifier = modifier.fillMaxWidth().padding(24.dp),
                 contentAlignment = Alignment.Center
             ){
                 Text(
@@ -173,7 +172,7 @@ fun DropDownCareers(
 
         is StatesControl.Error -> {
             Box(
-                modifier = Modifier.fillMaxWidth().padding(24.dp),
+                modifier = modifier.fillMaxWidth().padding(24.dp),
                 contentAlignment = Alignment.Center
             ){
                 Text(

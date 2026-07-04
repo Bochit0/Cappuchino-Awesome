@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.rememberNavBackStack
-import org.scesi.cappuchinoawesome.ui.features.home.ui.HomeViewModel
+import org.scesi.cappuchinoawesome.ui.features.home.HomeViewModel
 import org.scesi.cappuchinoawesome.ui.features.scaffold.CappuchinoScaffold
 import org.scesi.cappuchinoawesome.ui.features.settings.SettingsViewModel
 import org.scesi.cappuchinoawesome.ui.navigation.NavApp

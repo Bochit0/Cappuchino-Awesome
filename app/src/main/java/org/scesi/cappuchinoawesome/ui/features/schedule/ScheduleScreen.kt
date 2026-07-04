@@ -1,4 +1,4 @@
-package org.scesi.cappuchinoawesome.ui.features.schedule.ui
+package org.scesi.cappuchinoawesome.ui.features.schedule
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -49,7 +49,7 @@ fun ScheduleScreen(
 
     val detailState by viewModel.detailState.collectAsStateWithLifecycle()
 
-    Box(modifier = Modifier.fillMaxSize()){
+    Box(modifier = modifier.fillMaxSize()){
         Schedule(
             viewModel,
             detailState = detailState,
@@ -60,12 +60,11 @@ fun ScheduleScreen(
 @Composable
 fun Schedule(
     viewModel: ScheduleViewModel,
-    modifier: Modifier = Modifier,
     detailState: StatesControl<DetailCareer>,
 ){
     val openMenu by viewModel.openSemesters.collectAsStateWithLifecycle()
     val selectedGroups by viewModel.selectedGroups.collectAsStateWithLifecycle()
-    Column(modifier = modifier
+    Column(modifier = Modifier
         .fillMaxSize()
     ) {
         val titleHeader = when (detailState) {
@@ -135,7 +134,7 @@ fun InteractiveMenu(
                 shape = RoundedCornerShape(4.dp))
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            itemsIndexed(levels) { index, level ->
+            items(levels) { level ->
                 SemesterItem(
                     viewModel = viewModel,
                     semesterCode = "SEMESTRE ${level.code}",

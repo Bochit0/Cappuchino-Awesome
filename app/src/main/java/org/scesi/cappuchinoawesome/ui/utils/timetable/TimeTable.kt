@@ -1,5 +1,6 @@
 package org.scesi.cappuchinoawesome.ui.utils.timetable
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
@@ -80,15 +81,18 @@ fun TimeTable(selectedGroup: List<GroupSubject> = emptyList()){
             rowHeightForBlock(block, selectedGroup)
         }
     }
-
+    val verticalScrollState = rememberScrollState()
     Row(modifier = Modifier.fillMaxSize()) {
-        HourColumn(rowHeights = rowHeights)
+        HourColumn(
+            rowHeights = rowHeights,
+            verticalScrollState = verticalScrollState
+        )
 
         Row(
             modifier = Modifier
                 .fillMaxSize()
                 .horizontalScroll(rememberScrollState())
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(verticalScrollState)
         ) {
             Day.entries.forEach { day ->
                 DayColumn(
@@ -103,10 +107,14 @@ fun TimeTable(selectedGroup: List<GroupSubject> = emptyList()){
 }
 
 @Composable
-fun HourColumn(rowHeights: List<Dp>){
+fun HourColumn(
+    rowHeights: List<Dp>,
+    verticalScrollState: ScrollState
+){
     Row(
         modifier =
-            Modifier.fillMaxHeight(),
+            Modifier.fillMaxHeight()
+            .verticalScroll(verticalScrollState),
         verticalAlignment = Alignment.Top
     ) {
         Column(

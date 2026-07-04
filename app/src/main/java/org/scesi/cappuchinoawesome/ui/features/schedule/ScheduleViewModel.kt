@@ -28,9 +28,6 @@ class ScheduleViewModel(
     val openSubjectIndex : StateFlow<String?> = _openSubjectIndex.asStateFlow()
     val selectedGroups : StateFlow<List<GroupSubject>> = _selectedGroups.asStateFlow()
 
-    fun rebootTable(){
-        _selectedGroups.value = emptyList()
-    }
     fun toggleMenu(){
         _openSemesters.value = !_openSemesters.value
     }
@@ -52,7 +49,7 @@ class ScheduleViewModel(
                     StatesControl.Success(detail)
                 }
             }catch(e: Exception) {
-                _detailState.value = StatesControl.Error("No hay contenido")
+                _detailState.value = StatesControl.Error(e.message?:"No hay contenido")
             }
         }
     }

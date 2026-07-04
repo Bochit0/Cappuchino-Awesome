@@ -16,19 +16,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import org.scesi.cappuchinoawesome.ui.utils.button.ButtonComponent
 import org.scesi.cappuchinoawesome.ui.utils.header.HeaderComponent
-import org.scesi.cappuchinoawesome.ui.utils.icons.Icon
 
 
 @Composable
 fun SettingsScreen(
+    modifier: Modifier,
     settingsViewModel: SettingsViewModel,
 ){
-    Box(modifier = Modifier.fillMaxSize()){
-        Settings(modifier = Modifier, settingsViewModel)
-    }
+    Settings(modifier = modifier, settingsViewModel)
 }
 
 @Composable
@@ -41,7 +38,7 @@ fun Settings(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.primary)
                 .windowInsetsTopHeight(WindowInsets.statusBars)

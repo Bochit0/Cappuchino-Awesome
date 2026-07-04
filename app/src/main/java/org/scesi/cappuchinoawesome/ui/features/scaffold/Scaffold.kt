@@ -1,5 +1,6 @@
 package org.scesi.cappuchinoawesome.ui.features.scaffold
 
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.material3.Icon
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -13,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
-import org.scesi.cappuchinoawesome.ui.features.home.ui.HomeViewModel
+import org.scesi.cappuchinoawesome.ui.features.home.HomeViewModel
 import org.scesi.cappuchinoawesome.ui.features.settings.SettingsViewModel
 import org.scesi.cappuchinoawesome.ui.navigation.NavApp
 import org.scesi.cappuchinoawesome.ui.navigation.Routes
@@ -45,6 +46,7 @@ fun CappuchinoScaffold(
     Scaffold(
         modifier = modifier.fillMaxSize(),
         containerColor = MaterialTheme.colorScheme.background,
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {
             NavigationBar(
                 containerColor = MaterialTheme.colorScheme.primary
