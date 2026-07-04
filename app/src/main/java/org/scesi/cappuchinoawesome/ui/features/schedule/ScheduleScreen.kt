@@ -39,6 +39,7 @@ import org.scesi.cappuchinoawesome.ui.utils.timetable.TimeTable
 
 @Composable
 fun ScheduleScreen(
+    modifier: Modifier,
     viewModel: ScheduleViewModel = viewModel(),
     careerCode: Int,
 ){

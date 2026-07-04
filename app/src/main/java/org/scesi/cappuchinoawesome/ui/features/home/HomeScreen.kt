@@ -197,7 +197,7 @@ fun CareerList(
         itemContent = { career ->
             CareerCard(
                 careerName = career.name,
-                onClick = { onNavigate(Routes.ScreenSchedule(career.code)) }
+                onClick = { onNavigate(Routes.ScreenSchedule(careerCode = career.code)) }
             )
         }
     )

@@ -1,4 +1,4 @@
-package org.scesi.cappuchinoawesome.ui.features.schedule.ui
+package org.scesi.cappuchinoawesome.ui.features.schedule
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,17 +16,17 @@ import org.scesi.cappuchinoawesome.network.data.StatesControl
 class ScheduleViewModel(
     private val apiService: ApiService = RetrofitClient.retrofit
 ): ViewModel() {
-    private val _detailState = MutableStateFlow<StatesControl <DetailCareer>>(StatesControl.Loading)
+    private val _detailState = MutableStateFlow<StatesControl<DetailCareer>>(StatesControl.Loading)
     private val _openSemesters = MutableStateFlow<Boolean>(false)
     private val _openTeacherIndex = MutableStateFlow<Int?>(null)
     private val _openSubjectIndex = MutableStateFlow<String?>(null)
     private val _selectedGroups = MutableStateFlow<List<GroupSubject>>(emptyList())
 
-    val detailState : StateFlow< StatesControl <DetailCareer>> = _detailState.asStateFlow()
+    val detailState : StateFlow<StatesControl<DetailCareer>> = _detailState.asStateFlow()
     val openSemesters : StateFlow<Boolean> = _openSemesters.asStateFlow()
     val openTeacherIndex : StateFlow<Int?> = _openTeacherIndex.asStateFlow()
     val openSubjectIndex : StateFlow<String?> = _openSubjectIndex.asStateFlow()
-    val selectedGroups : StateFlow< List <GroupSubject>> = _selectedGroups.asStateFlow()
+    val selectedGroups : StateFlow<List<GroupSubject>> = _selectedGroups.asStateFlow()
 
     fun rebootTable(){
         _selectedGroups.value = emptyList()
