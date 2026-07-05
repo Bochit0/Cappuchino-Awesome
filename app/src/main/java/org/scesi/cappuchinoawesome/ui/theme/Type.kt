@@ -9,6 +9,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import org.scesi.cappuchinoawesome.R
 
 // Set of Material typography styles to start with
@@ -19,6 +21,10 @@ val jaquardaregular = FontFamily(
 
 val orbitron = FontFamily(
     Font(R.font.orbitron)
+)
+
+val spacegrotesk = FontFamily(
+    Font(R.font.spacegrotesk)
 )
 
 val localTypography = compositionLocalOf { false }
@@ -44,7 +50,7 @@ val Typography.subtitle: TextStyle
 val Typography.title: TextStyle
     @Composable get() = if (localTypography.current) {
         TextStyle(
-            fontFamily = jaquardaregular,
+            fontFamily = spacegrotesk,
             fontWeight = FontWeight.Normal,
             fontSize = 24.sp,
             lineHeight = 28.sp,
@@ -79,20 +85,29 @@ val Typography.text: TextStyle
         )
     }
 
-val Typography.titleApp: TextStyle
-    get() = TextStyle(
+fun titleApp(maxWidth: Dp): TextStyle =
+    TextStyle(
         fontFamily = jaquardaregular,
         fontWeight = FontWeight.Normal,
-        fontSize = 62.sp,
+        fontSize = when {
+            maxWidth < 360.dp -> 40.sp
+            maxWidth < 400.dp -> 54.sp
+            else -> 62.sp
+        },
         lineHeight = 29.sp,
         letterSpacing = 0.sp
     )
 
-val Typography.subtitleApp: TextStyle
-    get() = TextStyle(
+
+fun subtitleApp(maxWidth: Dp): TextStyle =
+    TextStyle(
         fontFamily = orbitron,
         fontWeight = FontWeight.Normal,
-        fontSize = 45.sp,
+        fontSize = when {
+            maxWidth < 360.dp -> 32.sp
+            maxWidth < 400.dp -> 39.sp
+            else -> 45.sp
+        },
         lineHeight = 22.sp,
         letterSpacing = 0.sp
     )

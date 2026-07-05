@@ -18,6 +18,7 @@ import org.scesi.cappuchinoawesome.ui.features.home.HomeViewModel
 import org.scesi.cappuchinoawesome.ui.features.settings.SettingsViewModel
 import org.scesi.cappuchinoawesome.ui.navigation.NavApp
 import org.scesi.cappuchinoawesome.ui.navigation.Routes
+import org.scesi.cappuchinoawesome.ui.theme.text
 import org.scesi.cappuchinoawesome.ui.utils.icons.Icon
 
 @Composable
@@ -60,7 +61,10 @@ fun CappuchinoScaffold(
                             contentDescription = "Sobre mí"
                         )
                     },
-                    label = { Text("Sobre mí") },
+                    label = { Text(
+                        text = "Sobre mí",
+                        style = MaterialTheme.typography.text
+                    ) },
                     colors = navItemColors
                 )
 
@@ -73,7 +77,10 @@ fun CappuchinoScaffold(
                             contentDescription = "Carreras"
                         )
                     },
-                    label = { Text("Carreras") },
+                    label = { Text(
+                        text = "Carreras",
+                        style = MaterialTheme.typography.text
+                    ) },
                     colors = navItemColors
                 )
 
@@ -86,7 +93,10 @@ fun CappuchinoScaffold(
                             contentDescription = "Settings"
                         )
                     },
-                    label = { Text("Configuracion") },
+                    label = { Text(
+                        text = "Configuracion",
+                        style = MaterialTheme.typography.text
+                    ) },
                     colors = navItemColors
                 )
             }
