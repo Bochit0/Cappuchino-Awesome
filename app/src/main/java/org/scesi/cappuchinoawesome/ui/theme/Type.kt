@@ -1,7 +1,6 @@
 package org.scesi.cappuchinoawesome.ui.theme
 
 
-import android.R.attr.maxWidth
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.compositionLocalOf
@@ -22,6 +21,10 @@ val jaquardaregular = FontFamily(
 
 val orbitron = FontFamily(
     Font(R.font.orbitron)
+)
+
+val spacegrotesk = FontFamily(
+    Font(R.font.spacegrotesk)
 )
 
 val localTypography = compositionLocalOf { false }
@@ -47,7 +50,7 @@ val Typography.subtitle: TextStyle
 val Typography.title: TextStyle
     @Composable get() = if (localTypography.current) {
         TextStyle(
-            fontFamily = jaquardaregular,
+            fontFamily = spacegrotesk,
             fontWeight = FontWeight.Normal,
             fontSize = 24.sp,
             lineHeight = 28.sp,

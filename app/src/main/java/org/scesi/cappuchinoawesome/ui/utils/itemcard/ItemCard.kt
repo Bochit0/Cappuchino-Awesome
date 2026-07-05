@@ -1,6 +1,5 @@
 package org.scesi.cappuchinoawesome.ui.utils.itemcard
 
-import android.R.attr.textStyle
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -44,7 +43,7 @@ fun ItemCard(
         Text(
             text = name,
             style = textStyle ?: MaterialTheme.typography.subtitle,
-            color = contentColor ?: MaterialTheme.colorScheme.background
+            color = contentColor ?: MaterialTheme.colorScheme.onPrimary
         )
     }
 }

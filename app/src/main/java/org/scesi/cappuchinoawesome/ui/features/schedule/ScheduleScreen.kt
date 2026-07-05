@@ -92,7 +92,7 @@ fun Schedule(
                     Icon.list(color = MaterialTheme.colorScheme.tertiary)
                 },
                 backgroundColor = MaterialTheme.colorScheme.primary,
-                textColor = MaterialTheme.colorScheme.tertiary
+                textColor = MaterialTheme.colorScheme.onPrimary
             )}
         )
 
