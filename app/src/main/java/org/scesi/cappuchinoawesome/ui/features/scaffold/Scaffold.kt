@@ -30,6 +30,7 @@ fun CappuchinoScaffold(
 ){
     val currentScreen = backStack.lastOrNull()
     fun navigateTab(target: Routes) {
+        backStack.clear()
         backStack.add(Routes.ScreenHome)
         if (target != Routes.ScreenHome) {
             backStack.add(target)
